@@ -228,9 +228,11 @@ main {
 }
 
 .category-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  border-color: rgba(103, 58, 183, 0.5);
-  box-shadow: 0 20px 40px rgba(103, 58, 183, 0.2);
+  transform: scale(1.03);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 10px 25px rgba(103, 58, 183, 0.3);
 }
 
 .category-card:active {
@@ -244,28 +246,34 @@ main {
   z-index: 0;
 }
 
+/* Flutter-matching SweepGradient backgrounds */
 .category-card-bg.purple {
-  background: radial-gradient(circle at top right, rgba(103, 58, 183, 0.4), transparent 70%);
+  background: conic-gradient(from 225deg at 0% 0%, #7E57C2, rgba(103, 58, 183, 0.8), rgba(81, 45, 168, 0.6), #7E57C2);
 }
 
 .category-card-bg.green {
-  background: radial-gradient(circle at top right, rgba(0, 200, 83, 0.4), transparent 70%);
+  background: conic-gradient(from 225deg at 0% 0%, #00C853, rgba(46, 125, 50, 0.8), rgba(27, 94, 32, 0.6), #00C853);
 }
 
 .category-card-bg.red {
-  background: radial-gradient(circle at top right, rgba(255, 23, 68, 0.4), transparent 70%);
+  background: conic-gradient(from 225deg at 0% 0%, #FF1744, rgba(198, 40, 40, 0.8), rgba(183, 28, 28, 0.6), #FF1744);
 }
 
 .category-card-bg.blue {
-  background: radial-gradient(circle at top right, rgba(41, 121, 255, 0.4), transparent 70%);
+  background: conic-gradient(from 225deg at 0% 0%, #2979FF, rgba(21, 101, 192, 0.8), rgba(13, 71, 161, 0.6), #2979FF);
 }
 
 .category-card-bg.orange {
-  background: radial-gradient(circle at top right, rgba(255, 145, 0, 0.4), transparent 70%);
+  background: conic-gradient(from 225deg at 0% 0%, #FF9100, rgba(239, 108, 0, 0.8), rgba(230, 81, 0, 0.6), #FF9100);
 }
 
 .category-card-bg.pink {
-  background: radial-gradient(circle at top right, rgba(245, 0, 87, 0.4), transparent 70%);
+  background: conic-gradient(from 225deg at 0% 0%, #F50057, rgba(194, 24, 91, 0.8), rgba(136, 14, 79, 0.6), #F50057);
+}
+
+/* BeIN gradient */
+.category-card-bg.bein {
+  background: conic-gradient(from 225deg at 0% 0%, #9067C6, rgba(103, 58, 183, 0.8), rgba(36, 0, 70, 0.6), #9067C6);
 }
 
 .category-card-content {
@@ -410,18 +418,22 @@ main {
   overflow: hidden;
 }
 
-/* Match Card */
+/* Match Card - Flutter MatchBox Design */
 .match-card {
-  background: var(--bg-card);
-  border-radius: var(--radius-md);
+  position: relative;
+  background: linear-gradient(to bottom right, #141414, #000000);
+  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease-out;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .match-card:hover {
+  transform: scale(1.02);
   border-color: var(--accent-primary);
-  box-shadow: var(--shadow-lg);
+  border-width: 2px;
+  box-shadow: 0 15px 30px rgba(103, 58, 183, 0.4);
 }
 
 .match-card.live {
@@ -534,6 +546,86 @@ main {
 .match-watch-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(103, 58, 183, 0.4);
+}
+
+/* Match Status - Solid Fill like Flutter */
+.match-status.live {
+  background: #F44336;
+  color: #FFFFFF;
+}
+
+.match-status.upcoming {
+  background: #2196F3;
+  color: #FFFFFF;
+}
+
+.match-status.finished {
+  background: rgba(80, 80, 80, 1);
+  color: #FFFFFF;
+}
+
+/* Champion Badge - Trapezoid */
+.match-champion-badge {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 16px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
+}
+
+.match-champion-badge.live {
+  background: rgba(244, 67, 54, 0.7);
+}
+
+.match-champion-badge.upcoming {
+  background: rgba(33, 150, 243, 0.7);
+}
+
+.match-champion-badge.finished {
+  background: rgba(80, 80, 80, 1);
+}
+
+/* Match Metadata Row */
+.match-metadata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  padding: 0 16px 45px;
+  font-size: 11px;
+  color: rgba(160, 160, 160, 1);
+}
+
+.match-metadata-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.match-metadata svg {
+  width: 14px;
+  height: 14px;
+  color: rgba(120, 120, 120, 1);
+}
+
+/* Divider Line */
+.match-divider {
+  width: 120px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 8px auto;
+}
+
+/* Premium Star */
+.match-premium-star {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #FFC107;
 }
 
 /* News Card */

@@ -20,7 +20,23 @@ export default function NewsCard({ article }: NewsCardProps) {
     const hasVideo = article.videoUrl && article.videoUrl.length > 0;
 
     const content = (
-        <div className="news-card">
+        <div
+            className="news-card"
+            style={{
+                borderRadius: '25px',
+                transition: 'all 0.2s ease-out',
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.02)';
+                e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                e.currentTarget.style.boxShadow = '0 8px 30px rgba(103, 58, 183, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.borderColor = 'var(--border-color)';
+                e.currentTarget.style.boxShadow = 'none';
+            }}
+        >
             {/* Image */}
             <div style={{ position: 'relative' }}>
                 <img
