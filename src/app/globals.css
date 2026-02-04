@@ -1031,48 +1031,51 @@ body {
   font-family: 'Cairo', sans-serif;
 }
 
-/* Live Pulse Animation (User Suggestion) */
-@keyframes pulse-red {
+/* Live Pulse Animation (User Suggestion - Final Polish) */
+@keyframes live-pulse {
   0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+    opacity: 1;
+    transform: scale(1);
   }
 
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
   }
 
   100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
 .match-status-badge.live {
-  animation: pulse-red 2s infinite !important;
-  background: #F44336 !important;
+  animation: live-pulse 1.5s infinite ease-in-out !important;
+  background: #FF0000 !important;
+  /* More aggressive red */
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5) !important;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-/* Bottom Nav Active State (User Suggestion) */
+/* Bottom Nav Active State (User Suggestion - Final Polish) */
 .nav-item.active {
   color: #B81CB0 !important;
   position: relative;
   transform: translateY(-2px);
 }
 
-.nav-item.active::before {
+.nav-item.active::after {
   content: '';
   position: absolute;
-  top: -12px;
-  width: 24px;
-  height: 3px;
+  top: -5px;
+  /* Above the icon */
+  width: 20px;
+  height: 4px;
   background: #B81CB0;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(184, 28, 176, 0.5);
+  box-shadow: 0 0 8px #B81CB0;
 }
 
 .nav-item.active span {
