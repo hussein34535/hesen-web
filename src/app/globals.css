@@ -140,14 +140,17 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  height: 60px;
+  /* Reduced from 70px */
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 12px;
+  /* Tighter side padding */
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  /* Stronger, tighter shadow */
 }
 
 .header-btn {
@@ -813,9 +816,10 @@ body {
 .channels-grid {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
-  /* 2-cols always on mobile */
   gap: 12px !important;
+  /* Proper layout gap */
   padding: 12px !important;
+  /* Reduced padding */
 }
 
 @media (min-width: 1024px) {
@@ -914,10 +918,11 @@ body {
 
 /* Search Bar - Flutter Match */
 .search-container {
-  padding: 8px 0 20px;
+  padding: 8px 12px 16px;
+  /* Reduced padding */
   position: sticky;
-  top: 70px;
-  /* Below fixed header */
+  top: 60px;
+  /* Matched new header height */
   background: var(--bg-dark);
   z-index: 100;
 }
@@ -1002,7 +1007,8 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  height: 64px;
+  /* Reduced from 70px */
   background: var(--app-bar-bg);
   display: flex;
   align-items: center;
@@ -1011,6 +1017,7 @@ body {
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   padding-bottom: env(safe-area-inset-bottom);
+  padding-top: 4px;
 }
 
 .nav-item {
@@ -1025,9 +1032,15 @@ body {
   flex: 1;
 }
 
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 2px;
+}
+
 .nav-item span {
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 600;
   font-family: 'Cairo', sans-serif;
 }
 
