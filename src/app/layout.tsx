@@ -1,8 +1,15 @@
+// This file is simplified to keep Metadata working. We will create a `components/Providers.tsx` first. 
+// Wait, I should create Providers.tsx first in the next tool call, then update this.
+// But I can't do conditional logic here easily.
+// I will create Providers.tsx right now via write_to_file in the NEXT step (parallel tool calls not supported for dependencies).
+// So I will edit layout.tsx to import Providers (which I will create in the next step).
+
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import './premium.css';
 import Header from '../components/Header';
 import BottomNav from '../components/BottomNav';
+import { Providers } from '@/components/Providers';
 
 export const metadata: Metadata = {
   title: '7eSen TV',
@@ -35,11 +42,13 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
       <body>
-        <div className="app-container">
-          <Header />
-          <main className="main-content">{children}</main>
-          <BottomNav />
-        </div>
+        <Providers>
+          <div className="app-container">
+            <Header />
+            <main className="main-content">{children}</main>
+            <BottomNav />
+          </div>
+        </Providers>
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
 'use client';
 
-import Header from '../../components/Header';
-import BottomNav from '../../components/BottomNav';
+// Layout provides header/nav
 
 export default function NotificationsPage() {
     // Mock notification data (Matches RemoteMessage structure from Flutter)
@@ -17,9 +16,9 @@ export default function NotificationsPage() {
         }
     };
 
+
     return (
-        <div className="app-container">
-            <Header />
+        <div className="page-fade-in">
             <main className="page-content" style={{ padding: '20px' }}>
                 <div style={{
                     background: '#1C1C1C',
@@ -63,7 +62,6 @@ export default function NotificationsPage() {
                     <p>لا توجد تنبيهات أخرى حالياً</p>
                 </div>
             </main>
-            <BottomNav />
         </div>
     );
 }

@@ -5,7 +5,7 @@
 .match-card {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 0.8;
+    /* aspect-ratio: 1 / 0.8; REMOVED to let content dictate height like Flutter */
     height: auto;
     border-radius: 24px !important;
     /* Elevation 4 Layered Shadow (Replica from Flutter) */
@@ -55,7 +55,8 @@
 }
 
 .category-card.has-image {
-    background: #1C1C1C !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    /* Glassy Black */
     /* Line 248 */
 }
 
@@ -138,6 +139,18 @@
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 16px !important;
     padding-bottom: 24px !important;
+}
+
+/* Mobile Grip Optimization (User Suggestion) */
+@media (max-width: 480px) {
+    .categories-grid {
+        grid-template-columns: 1fr !important;
+        /* Force single column on mobile */
+        gap: 16px !important;
+        /* Tighter gap for better thumb reach */
+        padding-bottom: 100px !important;
+        /* Context safe area for bottom nav */
+    }
 }
 
 @media (min-width: 768px) {
@@ -430,9 +443,9 @@
 }
 
 .category-img {
-    width: 55% !important;
-    /* Breathing room (User Suggestion) */
-    height: 55% !important;
+    width: 65% !important;
+    /* Increased from 55% for better visibility */
+    height: 65% !important;
     object-fit: contain !important;
     z-index: 4 !important;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) !important;
@@ -466,14 +479,17 @@
 }
 
 /* Match Card Redesign */
+/* Match Card - Exact Replica from matches_widgets.dart */
 .match-card {
     background: linear-gradient(135deg, #141414, #000000) !important;
+    /* Dark Default */
     border-radius: 20px !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     margin: 8px !important;
     transition: all 0.2s ease-out !important;
     position: relative !important;
-    overflow: visible !important;
+    overflow: hidden !important;
+    /* Clip children like Badge */
 }
 
 .match-card:hover {
@@ -591,7 +607,7 @@
 .modal-content {
     width: 100% !important;
     max-width: 500px !important;
-    background: #1C1C1C !important;
+    background: var(--card-background) !important;
     border-radius: 24px 24px 0 0 !important;
     padding: 20px 0 !important;
     box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5) !important;
@@ -645,7 +661,7 @@
     transform: translate(-50%, -50%) !important;
     width: 90% !important;
     max-width: 400px !important;
-    background: #1C1C1C !important;
+    background: var(--card-background) !important;
     border-radius: 24px !important;
     border: 1.5px solid rgba(184, 28, 176, 0.2) !important;
     padding: 24px !important;
@@ -797,7 +813,7 @@
 /* News & Goal Cards - Exact Vertical Match */
 .news-card,
 .video-card {
-    background: #1C1C1C !important;
+    background: var(--card-background) !important;
     border-radius: 25px !important;
     margin: 10px !important;
     overflow: hidden !important;

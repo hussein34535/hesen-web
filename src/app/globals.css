@@ -11,7 +11,7 @@
   --primary: #673AB7;
   --primary-low: rgba(103, 58, 183, 0.6);
   --bg-dark: #000000;
-  --card-dark: #1C1C1C;
+  /* --card-dark: #1C1C1C; Replaced by dynamic --card-background */
   --text-main: #FFFFFF;
   --text-dim: #E1BEE7;
   --accent: #B81CB0;
@@ -44,8 +44,8 @@ html {
 }
 
 body {
-  background-color: #000000;
-  color: var(--text-main);
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-family: 'Cairo', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
@@ -1003,7 +1003,7 @@ body {
   left: 0;
   right: 0;
   height: 70px;
-  background: #000000;
+  background: var(--app-bar-bg);
   display: flex;
   align-items: center;
   justify-content: space-around;

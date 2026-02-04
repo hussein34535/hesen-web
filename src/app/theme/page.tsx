@@ -1,18 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import Header from '../../components/Header';
-import BottomNav from '../../components/BottomNav';
+import { useTheme } from '../../context/ThemeContext';
 import { Palette, RotateCcw } from 'lucide-react';
 
 export default function ThemePage() {
-    const [colors, setColors] = useState({
-        primary: '#673AB7',
-        scaffold: '#000000',
-        card: '#1C1C1C',
-        appBar: '#000000',
-        secondary: '#B81CB0',
-    });
+    const { colors, setColor, resetColors } = useTheme();
 
     const themeItems = [
         { label: 'اللون الأساسي', key: 'primary', color: colors.primary },
@@ -22,26 +15,15 @@ export default function ThemePage() {
         { label: 'اللون الثانوي', key: 'secondary', color: colors.secondary },
     ];
 
-    const resetColors = () => {
-        setColors({
-            primary: '#673AB7',
-            scaffold: '#000000',
-            card: '#1C1C1C',
-            appBar: '#000000',
-            secondary: '#B81CB0',
-        });
-    };
-
     return (
-        <div className="app-container">
-            <Header />
+        <div className="page-fade-in">
             <main className="page-content" style={{ padding: '20px' }}>
                 <h2 style={{ fontSize: '22px', fontWeight: 'bold', marginBottom: '24px' }}>تخصيص الألوان</h2>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {themeItems.map((item) => (
                         <div key={item.key} style={{
-                            background: '#1C1C1C',
+                            background: 'var(--card-background)',
                             padding: '16px 20px',
                             borderRadius: '16px',
                             display: 'flex',
@@ -49,15 +31,34 @@ export default function ThemePage() {
                             alignItems: 'center',
                             border: '1px solid rgba(255,255,255,0.05)'
                         }}>
-                            <span style={{ fontSize: '16px', fontWeight: '600' }}>{item.label}</span>
-                            <div style={{
-                                width: '44px',
-                                height: '44px',
-                                borderRadius: '22px',
-                                background: item.color,
-                                boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-                                border: '2px solid rgba(255,255,255,0.1)'
-                            }} />
+                            <span style={{ fontSize: '16px', fontWeight: '600', color: 'var(--text-color)' }}>{item.label}</span>
+                            <div style={{ position: 'relative', width: '44px', height: '44px' }}>
+                                <input
+                                    type="color"
+                                    value={item.color as string}
+                                    onChange={(e) => setColor(item.key as any, e.target.value)}
+                                    style={{
+                                        border: 'none',
+                                        padding: 0,
+                                        width: '100%',
+                                        height: '100%',
+                                        opacity: 0,
+                                        position: 'absolute',
+                                        top: 0, left: 0,
+                                        zIndex: 2,
+                                        cursor: 'pointer'
+                                    }}
+                                />
+                                <div style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    borderRadius: '50%',
+                                    background: item.color as string,
+                                    boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                                    border: '2px solid rgba(255,255,255,0.1)',
+                                    zIndex: 1
+                                }} />
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -67,7 +68,7 @@ export default function ThemePage() {
                     style={{
                         width: '100%',
                         marginTop: '32px',
-                        background: '#673AB7',
+                        background: 'var(--primary-color)',
                         color: 'white',
                         padding: '16px',
                         borderRadius: '12px',
@@ -86,7 +87,6 @@ export default function ThemePage() {
                     إعادة تعيين الألوان
                 </button>
             </main>
-            <BottomNav />
         </div>
     );
 }

@@ -96,20 +96,7 @@ export default function HomePage() {
   return (
     <div className="page-fade-in" style={{ padding: '0 16px' }}>
       {/* Search Bar - Matching Flutter's _buildSearchBar */}
-      <div className="search-container">
-        <div className="search-bar">
-          <Search className="search-icon" size={20} color="#B81CB0" />
-          <input
-            type="text"
-            placeholder="بحث عن قناة..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          {searchQuery && (
-            <button className="clear-btn" onClick={() => setSearchQuery('')}>✕</button>
-          )}
-        </div>
-      </div>
+      {/* Search Bar Removed as per Flutter Source Parity */}
 
       {filteredCategories.length === 0 ? (
         <div className="empty-state">

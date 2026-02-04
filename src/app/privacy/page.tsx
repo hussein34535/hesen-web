@@ -1,12 +1,11 @@
 'use client';
 
-import Header from '../../components/Header';
-import BottomNav from '../../components/BottomNav';
+// Header/BottomNav provided by layout.tsx
+// Just standard page content.
 
 export default function PrivacyPolicy() {
     return (
-        <div className="app-container">
-            <Header />
+        <div className="page-fade-in">
             <main className="page-content" style={{ padding: '24px', direction: 'ltr', textAlign: 'left' }}>
                 <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>Privacy Policy</h1>
 
@@ -84,7 +83,6 @@ export default function PrivacyPolicy() {
                     </p>
                 </section>
             </main>
-            <BottomNav />
         </div>
     );
 }

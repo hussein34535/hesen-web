@@ -44,7 +44,7 @@ export default function Header() {
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                background: '#673AB7',
+                background: 'var(--app-bar-bg)', // Dynamic Theme Color
                 boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
                 height: '70px',
                 padding: '0 16px',
