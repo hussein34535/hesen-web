@@ -9,9 +9,9 @@
     height: auto;
     border-radius: 24px !important;
     /* Elevation 4 Layered Shadow (Replica from Flutter) */
-    box-shadow:
-        0px 8px 15px rgba(0, 0, 0, 0.2),
-        inset 0px 1px 1px rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
+        0px 7px 10px 1px rgba(0, 0, 0, 0.14),
+        0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
     border: 1.2px solid rgba(255, 255, 255, 0.15) !important;
     background: #000000;
     overflow: hidden;
@@ -55,8 +55,8 @@
 }
 
 .category-card.has-image {
-    background: rgba(0, 0, 0, 0.6) !important;
-    /* Glassy Black */
+    background: rgba(255, 255, 255, 0.05) !important;
+    /* Glass Effect */
     /* Line 248 */
 }
 
@@ -148,7 +148,7 @@
         /* Force single column on mobile */
         gap: 16px !important;
         /* Tighter gap for better thumb reach */
-        padding-bottom: 100px !important;
+        padding-bottom: 90px !important;
         /* Context safe area for bottom nav */
     }
 }
@@ -193,35 +193,35 @@
 }
 
 .category-card-bg.green {
-    background: conic-gradient(from 0deg at 0% 0%, #00C853, #2E7D32, #1B5E20, #00C853) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #00C853, #2E7D32, #1B5E20, #00C853) !important;
 }
 
 .category-card-bg.red {
-    background: conic-gradient(from 0deg at 0% 0%, #FF1744, #C62828, #B71C1C, #FF1744) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #FF1744, #C62828, #B71C1C, #FF1744) !important;
 }
 
 .category-card-bg.blue {
-    background: conic-gradient(from 0deg at 0% 0%, #2979FF, #1565C0, #0D47A1, #2979FF) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #2979FF, #1565C0, #0D47A1, #2979FF) !important;
 }
 
 .category-card-bg.purple {
-    background: conic-gradient(from 0deg at 0% 0%, #D500F9, #7B1FA2, #4A148C, #D500F9) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #D500F9, #7B1FA2, #4A148C, #D500F9) !important;
 }
 
 .category-card-bg.orange {
-    background: conic-gradient(from 0deg at 0% 0%, #FF9100, #EF6C00, #E65100, #FF9100) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #FF9100, #EF6C00, #E65100, #FF9100) !important;
 }
 
 .category-card-bg.pink {
-    background: conic-gradient(from 0deg at 0% 0%, #F50057, #C2185B, #880E4F, #F50057) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #F50057, #C2185B, #880E4F, #F50057) !important;
 }
 
 .category-card-bg.bein {
-    background: conic-gradient(from 0deg at 0% 0%, #9067C6, #673AB7, #240046, #9067C6) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #9067C6, #673AB7, #240046, #9067C6) !important;
 }
 
 .category-card-bg.default {
-    background: conic-gradient(from 0deg at 0% 0%, #7E57C2, #673AB7, #512DA8, #7E57C2) !important;
+    background: conic-gradient(from 0deg at 60% 40%, #7E57C2, #673AB7, #512DA8, #7E57C2) !important;
 }
 
 .category-card:hover {
@@ -481,8 +481,9 @@
 /* Match Card Redesign */
 /* Match Card - Exact Replica from matches_widgets.dart */
 .match-card {
-    background: linear-gradient(135deg, #141414, #000000) !important;
-    /* Dark Default */
+    background: rgba(20, 20, 20, 0.7) !important;
+    /* Glassy Black */
+    backdrop-filter: blur(10px) !important;
     border-radius: 20px !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     margin: 8px !important;
@@ -581,12 +582,8 @@
 }
 
 .username-gradient {
-    background: linear-gradient(to right, #1565C0, #512DA8, #2196F3) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
+    /* ... */
     font-weight: 900 !important;
-    font-size: 22px !important;
 }
 
 /* Modal Bottom Sheet / Drawer Emulation */
