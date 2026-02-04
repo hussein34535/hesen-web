@@ -85,12 +85,6 @@ export default function CategoryCard({ category }: CategoryCardProps) {
                 <div className="category-icon-container">
                     {imageUrl ? (
                         <img src={imageUrl} alt={category.name} loading="lazy" className="category-img" />
-                    ) : lowerName.includes('bein') ? (
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/BeIN_Sports_logo.svg/2560px-BeIN_Sports_logo.svg.png"
-                            alt="beIN"
-                            className="category-img"
-                        />
                     ) : (
                         <div className="icon-circle">
                             <Icon size={28} className="base-icon" />

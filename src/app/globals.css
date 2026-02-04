@@ -8,27 +8,24 @@
 }
 
 :root {
-  /* Core Colors from Flutter */
-  --primary-color: #673AB7;
-  --secondary-color: #B81CB0;
-  --accent-color: #B81CB0;
+  --primary: #673AB7;
+  --primary-low: rgba(103, 58, 183, 0.6);
   --bg-dark: #000000;
-  --bg-card: #1C1C1C;
-  /* Mesh background opacity */
-  --border-color: rgba(255, 255, 255, 0.15);
-  --text-white: #FFFFFF;
-  --premium-gold: #FFC107;
-  --premium-gold-dark: #FFA000;
+  --card-dark: #1C1C1C;
+  --text-main: #FFFFFF;
+  --text-dim: #E1BEE7;
+  --accent: #B81CB0;
+  --transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* SweepGradient emulation (centered top-left) */
-  --grad-sport: conic-gradient(from 225deg at 0% 0%, #4CAF50, rgba(76, 175, 80, 0.8), rgba(76, 175, 80, 0.6), #4CAF50);
-  --grad-movie: conic-gradient(from 225deg at 0% 0%, #F44336, rgba(244, 67, 54, 0.8), rgba(244, 67, 54, 0.6), #F44336);
-  --grad-news: conic-gradient(from 225deg at 0% 0%, #2196F3, rgba(33, 150, 243, 0.8), rgba(33, 150, 243, 0.6), #2196F3);
-  --grad-serie: conic-gradient(from 225deg at 0% 0%, #9C27B0, rgba(156, 39, 176, 0.8), rgba(156, 39, 176, 0.6), #9C27B0);
-  --grad-kid: conic-gradient(from 225deg at 0% 0%, #FF9800, rgba(255, 152, 0, 0.8), rgba(255, 152, 0, 0.6), #FF9800);
-  --grad-music: conic-gradient(from 225deg at 0% 0%, #E91E63, rgba(233, 30, 99, 0.8), rgba(233, 30, 99, 0.6), #E91E63);
-  --grad-bein: conic-gradient(from 225deg at 0% 0%, #673AB7, rgba(103, 58, 183, 0.8), rgba(103, 58, 183, 0.6), #673AB7);
-  --grad-default: conic-gradient(from 225deg at 0% 0%, #673AB7, rgba(103, 58, 183, 0.8), rgba(103, 58, 183, 0.6), #673AB7);
+  /* Exact Flutter SweepGradient Emulation (Line 250) */
+  --grad-green: conic-gradient(from 180deg at 50% 50%, #4CAF50 0%, rgba(76, 175, 80, 0.8) 40%, rgba(76, 175, 80, 0.6) 60%, #4CAF50 100%);
+  --grad-red: conic-gradient(from 180deg at 50% 50%, #F44336 0%, rgba(244, 67, 54, 0.8) 40%, rgba(244, 67, 54, 0.6) 60%, #F44336 100%);
+  --grad-blue: conic-gradient(from 180deg at 50% 50%, #2196F3 0%, rgba(33, 150, 243, 0.8) 40%, rgba(33, 150, 243, 0.6) 60%, #2196F3 100%);
+  --grad-purple: conic-gradient(from 180deg at 50% 50%, #9C27B0 0%, rgba(156, 39, 176, 0.8) 40%, rgba(156, 39, 176, 0.6) 60%, #9C27B0 100%);
+  --grad-orange: conic-gradient(from 180deg at 50% 50%, #FF9800 0%, rgba(255, 152, 0, 0.8) 40%, rgba(255, 152, 0, 0.6) 60%, #FF9800 100%);
+  --grad-pink: conic-gradient(from 180deg at 50% 50%, #E91E63 0%, rgba(233, 30, 99, 0.8) 40%, rgba(233, 30, 99, 0.6) 60%, #E91E63 100%);
+  --grad-bein: conic-gradient(from 180deg at 50% 50%, #673AB7 0%, rgba(103, 58, 183, 0.8) 40%, rgba(103, 58, 183, 0.6) 60%, #673AB7 100%);
+  --grad-default: conic-gradient(from 180deg at 50% 50%, #673AB7 0%, rgba(103, 58, 183, 0.8) 40%, rgba(103, 58, 183, 0.6) 60%, #673AB7 100%);
 
   --radius-lg: 24px;
 }
@@ -804,36 +801,34 @@ body {
   padding-top: 8px;
 }
 
-/* Grid Layouts - Exact Flutter Symmetry (Line 46) */
+/* Grid Layouts - Exact Flutter Symmetry (Line 46 & 546) */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Always 2-col on mobile (Line 547) */
+  gap: 10px;
+  padding: 12px 10px;
+}
+
+@media (min-width: 1024px) {
+  .categories-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 30px;
+  }
+}
+
 .channels-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  padding: 20px 16px;
-  /* Line 44 */
-}
-
-@media (min-width: 450px) {
-  .channels-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 10px !important;
+  padding: 10px !important;
 }
 
 @media (min-width: 1024px) {
   .channels-grid {
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 25px;
-    padding: 30px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .channels-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    padding: 30px;
-    max-width: 1500px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)) !important;
+    gap: 20px !important;
   }
 }
 

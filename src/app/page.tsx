@@ -116,7 +116,7 @@ export default function HomePage() {
           <p>لا توجد نتائج للبحث</p>
         </div>
       ) : (
-        <div className="channels-grid">
+        <div className="categories-grid">
           {filteredCategories.map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}

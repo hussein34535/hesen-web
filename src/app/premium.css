@@ -1,24 +1,44 @@
 /* 100% Flutter Parity - Absolute Replication Layer */
 
-/* Category Card - Source Synced (Line 202) */
 .category-card {
     position: relative !important;
-    height: 135px !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 0.85 !important;
+    /* User suggestion: 1 / 0.8 */
+    height: auto !important;
     border-radius: 24px !important;
     border: 1.2px solid rgba(255, 255, 255, 0.15) !important;
     /* Line 206 */
     background: #000000 !important;
-    /* Base scaffold bg */
     overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2) !important;
-    /* Line 211 */
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    /* Soft Shadow Match (User Suggestion) */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.05) !important;
     text-decoration: none !important;
     z-index: 1 !important;
+}
+
+.category-card:active {
+    transform: scale(0.95) !important;
+}
+
+.category-card::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: transparent !important;
+    z-index: 10 !important;
+    transition: background 0.1s !important;
+    pointer-events: none !important;
+}
+
+.category-card:active::after {
+    background: rgba(255, 255, 255, 0.15) !important;
+    /* Ripple Effect Emulation */
 }
 
 .category-card.has-image {
@@ -282,15 +302,21 @@
 }
 
 .icon-circle {
-    width: 60px !important;
-    height: 60px !important;
+    width: 65px !important;
+    /* Line 315 */
+    height: 65px !important;
     border-radius: 50% !important;
     background: rgba(255, 255, 255, 0.2) !important;
+    /* Line 318 */
     border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+    /* Line 322 */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     color: white !important;
+    z-index: 4 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26) !important;
+    /* Line 331 */
 }
 
 @media (min-width: 1024px) {
@@ -307,7 +333,8 @@
 
 /* Category Name (Lines 342-367) */
 .category-name {
-    font-size: 15px !important;
+    font-size: 16px !important;
+    /* Line 354 */
     font-weight: 900 !important;
     color: white !important;
     margin-top: 14px !important;
@@ -315,6 +342,7 @@
     z-index: 4 !important;
     letter-spacing: 0.5px !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.38) !important;
+    /* Line 360 */
 }
 
 @media (min-width: 1024px) {
@@ -322,6 +350,17 @@
         font-size: 22px !important;
         margin-top: 16px !important;
     }
+}
+
+.category-img {
+    width: 65% !important;
+    /* Breathing room (User Suggestion) */
+    height: 65% !important;
+    object-fit: contain !important;
+    z-index: 4 !important;
+    filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.5)) !important;
+    /* Depth (User Suggestion) */
+    transition: transform 0.3s ease !important;
 }
 
 /* Premium Tag - Exact Gradient (Lines 382-384) */
