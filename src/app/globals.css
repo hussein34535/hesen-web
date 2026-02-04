@@ -37,6 +37,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* iOS Bounce (User Suggestion) */
+}
+
 body {
   background-color: #000000;
   color: var(--text-main);
@@ -1025,8 +1031,48 @@ body {
   font-family: 'Cairo', sans-serif;
 }
 
+/* Live Pulse Animation (User Suggestion) */
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+  }
+}
+
+.match-status-badge.live {
+  animation: pulse-red 2s infinite !important;
+  background: #F44336 !important;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Bottom Nav Active State (User Suggestion) */
 .nav-item.active {
-  color: #7B1FA2;
+  color: #B81CB0 !important;
+  position: relative;
+  transform: translateY(-2px);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  width: 24px;
+  height: 3px;
+  background: #B81CB0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(184, 28, 176, 0.5);
 }
 
 .nav-item.active span {

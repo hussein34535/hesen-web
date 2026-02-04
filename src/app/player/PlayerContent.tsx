@@ -17,11 +17,20 @@ export default function PlayerContent() {
     const isPremium = searchParams.get('premium') === 'true';
 
     // Premium Check Logic (User Suggestion)
+    // Premium Check Logic (User Suggestion)
     useEffect(() => {
-        const isUserSubscribed = true; // Placeholder for Firebase Auth
-        if (isPremium && !isUserSubscribed) {
-            router.push('/premium');
-            return;
+        // Mock Auth State - In a real app, this comes from useAuth() context
+        const user = { isLoggedIn: true, isSubscribed: true }; // CHANGE THIS TO TEST
+
+        if (isPremium) {
+            if (!user.isLoggedIn) {
+                router.push('/login'); // Redirect to login first
+                return;
+            }
+            if (!user.isSubscribed) {
+                router.push('/premium'); // Then check premium
+                return;
+            }
         }
     }, [isPremium, router]);
 

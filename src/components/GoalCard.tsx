@@ -33,7 +33,6 @@ export default function GoalCard({ goal }: GoalCardProps) {
                     alt={goal.title}
                     width={400}
                     height={225}
-                    unoptimized
                     style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 />
 

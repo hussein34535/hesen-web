@@ -91,7 +91,6 @@ export default function CategoryCard({ category }: CategoryCardProps) {
                             width={100}
                             height={100}
                             className="category-img"
-                            unoptimized
                         />
                     ) : (
                         <div className="icon-circle">

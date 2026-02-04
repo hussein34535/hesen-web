@@ -75,7 +75,6 @@ export default function MatchCard({ match }: MatchCardProps) {
                         alt={match.homeTeam}
                         width={45}
                         height={45}
-                        unoptimized
                         style={{ width: '45px', height: '45px', marginBottom: '6px', objectFit: 'contain' }}
                     />
                     <span className="match-team-name" style={{ fontSize: '13px', fontWeight: '700', color: 'white', textAlign: 'center' }}>{match.homeTeam}</span>
@@ -94,7 +93,6 @@ export default function MatchCard({ match }: MatchCardProps) {
                         alt={match.awayTeam}
                         width={45}
                         height={45}
-                        unoptimized
                         style={{ width: '45px', height: '45px', marginBottom: '6px', objectFit: 'contain' }}
                     />
                     <span className="match-team-name" style={{ fontSize: '13px', fontWeight: '700', color: 'white', textAlign: 'center' }}>{match.awayTeam}</span>

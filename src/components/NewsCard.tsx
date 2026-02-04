@@ -30,7 +30,6 @@ export default function NewsCard({ article }: NewsCardProps) {
                     className="news-image"
                     width={400}
                     height={200}
-                    unoptimized
                     style={{ objectFit: 'cover' }}
                 />
                 {hasVideo && (
