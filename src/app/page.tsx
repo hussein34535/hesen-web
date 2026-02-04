@@ -94,7 +94,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="page-fade-in" style={{ padding: '0 12px' }}>
+    <div className="page-fade-in" style={{ padding: '0 16px' }}>
       {/* Search Bar - Matching Flutter's _buildSearchBar */}
       <div className="search-container">
         <div className="search-bar">

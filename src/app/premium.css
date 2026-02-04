@@ -3,22 +3,27 @@
 /* Category Card - Source Synced (Line 202) */
 .category-card {
     position: relative !important;
+    height: 135px !important;
     border-radius: 24px !important;
     border: 1.2px solid rgba(255, 255, 255, 0.15) !important;
     /* Line 206 */
+    background: #000000 !important;
+    /* Base scaffold bg */
     overflow: hidden !important;
-    height: 135px !important;
-    background: #1C1C1D !important;
-    /* DarkCardColor Match */
-    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2) !important;
-    /* Line 211 */
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2) !important;
+    /* Line 211 */
     text-decoration: none !important;
     z-index: 1 !important;
+}
+
+.category-card.has-image {
+    background: #1C1C1C !important;
+    /* Line 248 */
 }
 
 /* Glass Overlay - Exact LinearGradient (Lines 231-238) */

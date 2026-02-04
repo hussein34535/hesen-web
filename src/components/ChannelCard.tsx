@@ -61,13 +61,13 @@ export default function CategoryCard({ category }: CategoryCardProps) {
     const lowerName = category.name.toLowerCase();
 
     return (
-        <Link href={`/category/${category.id}`} className="category-card fade-in">
+        <Link href={`/category/${category.id}`} className={`category-card fade-in ${imageUrl ? 'has-image' : ''}`}>
             {/* Glossy Top Highlight (Line 774) */}
             <div className="glossy-highlight" />
 
             {/* Background Layers (Lines 228, 243) */}
             <div className="category-card-bg-glass" />
-            <div className={`category-card-bg ${bgClass}`} />
+            {!imageUrl && <div className={`category-card-bg ${bgClass}`} />}
 
             {/* Pattern Overlay - Circles (Line 268) */}
             {!imageUrl && !lowerName.includes('bein') && <div className="category-card-pattern" />}

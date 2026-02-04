@@ -37,7 +37,7 @@ export default function RootLayout({
       <body>
         <div className="app-container">
           <Header />
-          <main>{children}</main>
+          <main className="main-content">{children}</main>
           <BottomNav />
         </div>
       </body>
