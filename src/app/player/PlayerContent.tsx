@@ -24,11 +24,11 @@ export default function PlayerContent() {
 
         if (isPremium) {
             if (!user.isLoggedIn) {
-                router.push('/login'); // Redirect to login first
+                router.replace('/login'); // Redirect to login first (Secure Replace)
                 return;
             }
             if (!user.isSubscribed) {
-                router.push('/premium'); // Then check premium
+                router.replace('/premium'); // Then check premium (Secure Replace)
                 return;
             }
         }

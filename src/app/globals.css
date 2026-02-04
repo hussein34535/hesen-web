@@ -89,24 +89,24 @@ body {
 }
 
 /* Skeleton Shimmer */
-.skeleton-shimmer {
-  background: linear-gradient(90deg,
-      rgba(255, 255, 255, 0.03) 25%,
-      rgba(255, 255, 255, 0.08) 50%,
-      rgba(255, 255, 255, 0.03) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite linear;
-  border-radius: 12px;
-}
-
 @keyframes shimmer {
   0% {
-    background-position: 200% 0;
+    background-position: -200% 0;
   }
 
   100% {
-    background-position: -200% 0;
+    background-position: 200% 0;
   }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg,
+      #1C1C1C 25%,
+      #2C2C2C 50%,
+      #1C1C1C 75%) !important;
+  background-size: 200% 100% !important;
+  animation: shimmer 1.2s infinite linear !important;
+  border-radius: 12px;
 }
 
 /* Page Transition */
@@ -1060,26 +1060,29 @@ body {
 }
 
 /* Bottom Nav Active State (User Suggestion - Final Polish) */
+/* Bottom Nav Active State (Material 3 Capsule Style) */
 .nav-item.active {
   color: #B81CB0 !important;
   position: relative;
-  transform: translateY(-2px);
+  transform: none !important;
 }
 
 .nav-item.active::after {
-  content: '';
-  position: absolute;
-  top: -5px;
-  /* Above the icon */
-  width: 20px;
-  height: 4px;
-  background: #B81CB0;
-  border-radius: 10px;
-  box-shadow: 0 0 8px #B81CB0;
+  display: none !important;
+}
+
+.nav-item.active svg {
+  background: rgba(184, 28, 176, 0.2);
+  padding: 4px 16px;
+  border-radius: 20px;
+  color: #B81CB0;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(184, 28, 176, 0.1);
 }
 
 .nav-item.active span {
   font-weight: 700;
+  margin-top: 4px;
 }
 
 .nav-item:active {

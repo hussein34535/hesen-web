@@ -84,6 +84,65 @@
     z-index: 5 !important;
 }
 
+/* Category Card Background Gradients - Synced with Flutter's SweepGradient */
+.category-card-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+}
+
+.category-card-bg.green {
+    background: var(--grad-green) !important;
+}
+
+.category-card-bg.red {
+    background: var(--grad-red) !important;
+}
+
+.category-card-bg.blue {
+    background: var(--grad-blue) !important;
+}
+
+.category-card-bg.purple {
+    background: var(--grad-purple) !important;
+}
+
+.category-card-bg.orange {
+    background: var(--grad-orange) !important;
+}
+
+.category-card-bg.pink {
+    background: var(--grad-pink) !important;
+}
+
+.category-card-bg.bein {
+    background: var(--grad-bein) !important;
+}
+
+.category-card-bg.default {
+    background: var(--grad-default) !important;
+}
+
+/* Category Grid Layout */
+.categories-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+    padding-bottom: 24px !important;
+}
+
+@media (min-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+
 .category-card-bg-glass {
     position: absolute !important;
     inset: 0 !important;
@@ -370,6 +429,8 @@
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) !important;
     /* Depth (User Suggestion) */
     transition: transform 0.3s ease !important;
+    border-radius: 12px !important;
+    /* Rounded Edges (User Suggestion) */
 }
 
 /* Premium Tag - Exact Gradient (Lines 382-384) */
