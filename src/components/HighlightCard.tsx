@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Play, Clock, Stars } from 'lucide-react';
 
 interface Highlight {
@@ -26,13 +27,13 @@ export default function HighlightCard({ highlight }: HighlightCardProps) {
         >
             {/* Thumbnail */}
             <div className="video-thumbnail">
-                <img
+                <Image
                     src={highlight.thumbnail || '/no-image.png'}
                     alt={highlight.title}
-                    loading="lazy"
-                    onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/no-image.png';
-                    }}
+                    width={400}
+                    height={225}
+                    unoptimized
+                    style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 />
 
                 {/* Play Button Overlay */}

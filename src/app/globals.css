@@ -43,15 +43,16 @@ body {
   font-family: 'Cairo', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
-  direction: ltr;
-  /* Keeping content logic, elements will use dir="rtl" where needed */
+  direction: rtl;
+  /* Proper Arabic Web Standard */
+  text-align: right;
   padding-bottom: 90px;
 }
 
 .main-content {
   max-width: 900px;
   margin: 0 auto;
-  padding-top: 70px;
+  /* Adjusted for sticky header */
   min-height: 100vh;
   width: 100%;
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Tv, Mic, Star } from 'lucide-react';
 
 interface StreamLink {
@@ -68,12 +69,14 @@ export default function MatchCard({ match }: MatchCardProps) {
             {/* Teams & Status Section - exact padding */}
             <div className="match-teams" style={{ padding: '24px 16px 0 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className="match-team home" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <img
+                    <Image
                         className="match-team-logo"
                         src={match.homeLogo || '/no-image.png'}
                         alt={match.homeTeam}
-                        onError={(e) => (e.currentTarget.src = '/no-image.png')}
-                        style={{ width: '45px', height: '45px', marginBottom: '6px' }}
+                        width={45}
+                        height={45}
+                        unoptimized
+                        style={{ width: '45px', height: '45px', marginBottom: '6px', objectFit: 'contain' }}
                     />
                     <span className="match-team-name" style={{ fontSize: '13px', fontWeight: '700', color: 'white', textAlign: 'center' }}>{match.homeTeam}</span>
                 </div>
@@ -85,12 +88,14 @@ export default function MatchCard({ match }: MatchCardProps) {
                 </div>
 
                 <div className="match-team away" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <img
+                    <Image
                         className="match-team-logo"
                         src={match.awayLogo || '/no-image.png'}
                         alt={match.awayTeam}
-                        onError={(e) => (e.currentTarget.src = '/no-image.png')}
-                        style={{ width: '45px', height: '45px', marginBottom: '6px' }}
+                        width={45}
+                        height={45}
+                        unoptimized
+                        style={{ width: '45px', height: '45px', marginBottom: '6px', objectFit: 'contain' }}
                     />
                     <span className="match-team-name" style={{ fontSize: '13px', fontWeight: '700', color: 'white', textAlign: 'center' }}>{match.awayTeam}</span>
                 </div>

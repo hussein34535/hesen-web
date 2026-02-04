@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Play, Clock } from 'lucide-react';
 
 interface NewsArticle {
@@ -23,14 +24,14 @@ export default function NewsCard({ article }: NewsCardProps) {
         <div className="news-card fade-in">
             {/* Image / Thumbnail */}
             <div className="news-thumbnail-container">
-                <img
+                <Image
                     src={article.image || '/no-image.png'}
                     alt={article.title}
                     className="news-image"
-                    loading="lazy"
-                    onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/no-image.png';
-                    }}
+                    width={400}
+                    height={200}
+                    unoptimized
+                    style={{ objectFit: 'cover' }}
                 />
                 {hasVideo && (
                     <div className="video-play-overlay">

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Play, Clock, Diamond } from 'lucide-react';
 
 interface Goal {
@@ -27,13 +28,13 @@ export default function GoalCard({ goal }: GoalCardProps) {
         >
             {/* Thumbnail */}
             <div className="video-thumbnail">
-                <img
+                <Image
                     src={goal.thumbnail || '/no-image.png'}
                     alt={goal.title}
-                    loading="lazy"
-                    onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/no-image.png';
-                    }}
+                    width={400}
+                    height={225}
+                    unoptimized
+                    style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 />
 
                 {/* Play Button Overlay */}

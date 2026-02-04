@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Tv, Film, Newspaper, Music, Baby, Trophy, Stars, Clapperboard, MonitorPlay, Play, ChevronLeft } from 'lucide-react';
 
 export interface Channel {
@@ -84,7 +85,14 @@ export default function CategoryCard({ category }: CategoryCardProps) {
             <div className="category-card-content">
                 <div className="category-icon-container">
                     {imageUrl ? (
-                        <img src={imageUrl} alt={category.name} loading="lazy" className="category-img" />
+                        <Image
+                            src={imageUrl}
+                            alt={category.name}
+                            width={100}
+                            height={100}
+                            className="category-img"
+                            unoptimized
+                        />
                     ) : (
                         <div className="icon-circle">
                             <Icon size={28} className="base-icon" />

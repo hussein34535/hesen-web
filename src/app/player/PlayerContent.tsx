@@ -14,6 +14,16 @@ export default function PlayerContent() {
 
     const url = searchParams.get('url') || '';
     const name = searchParams.get('name') || 'مشغل الفيديو';
+    const isPremium = searchParams.get('premium') === 'true';
+
+    // Premium Check Logic (User Suggestion)
+    useEffect(() => {
+        const isUserSubscribed = true; // Placeholder for Firebase Auth
+        if (isPremium && !isUserSubscribed) {
+            router.push('/premium');
+            return;
+        }
+    }, [isPremium, router]);
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
@@ -150,6 +160,7 @@ export default function PlayerContent() {
             <div
                 ref={containerRef}
                 className="relative video-container mx-auto max-w-4xl"
+                style={{ direction: 'ltr' }}
                 onClick={() => setShowControls(!showControls)}
             >
                 <video

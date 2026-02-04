@@ -41,8 +41,11 @@ export default function Header() {
     return (
         <>
             <header className="header" style={{
-                background: 'transparent',
-                boxShadow: 'none',
+                position: 'sticky',
+                top: 0,
+                zIndex: 1000,
+                background: '#673AB7',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
                 height: '70px',
                 padding: '0 16px',
                 display: 'flex',
@@ -79,7 +82,13 @@ export default function Header() {
 
             {/* Flutter-style Search Bar (Body level) */}
             {isSearchActive && (
-                <div className="search-bar-container" style={{ padding: '8px 16px' }}>
+                <div className="search-bar-container" style={{
+                    padding: '8px 16px',
+                    position: 'sticky',
+                    top: '70px',
+                    zIndex: 999,
+                    background: '#000'
+                }}>
                     <div style={{
                         height: '48px',
                         background: '#1C1C1C',
