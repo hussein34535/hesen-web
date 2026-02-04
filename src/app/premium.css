@@ -3,12 +3,11 @@
 .category-card {
     position: relative !important;
     width: 100% !important;
-    aspect-ratio: 1 / 0.85 !important;
-    /* User suggestion: 1 / 0.8 */
+    aspect-ratio: 1 / 0.8 !important;
+    /* Fixed parity (User Suggestion) */
     height: auto !important;
     border-radius: 24px !important;
-    border: 1.2px solid rgba(255, 255, 255, 0.15) !important;
-    /* Line 206 */
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     background: #000000 !important;
     overflow: hidden !important;
     display: flex !important;
@@ -16,14 +15,17 @@
     align-items: center !important;
     justify-content: center !important;
     transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    /* Soft Shadow Match (User Suggestion) */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.05) !important;
+    /* High-Fidelity Shadow (User Suggestion) */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(4px) !important;
     text-decoration: none !important;
     z-index: 1 !important;
 }
 
 .category-card:active {
-    transform: scale(0.95) !important;
+    transform: scale(0.92) !important;
+    /* Deeper press (User Suggestion) */
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .category-card::after {
@@ -333,14 +335,15 @@
 
 /* Category Name (Lines 342-367) */
 .category-name {
-    font-size: 16px !important;
-    /* Line 354 */
-    font-weight: 900 !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    /* Extra Bold (User Suggestion) */
     color: white !important;
     margin-top: 14px !important;
     text-align: center !important;
     z-index: 4 !important;
-    letter-spacing: 0.5px !important;
+    letter-spacing: -0.5px !important;
+    /* Condensed like Mobile (User Suggestion) */
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.38) !important;
     /* Line 360 */
 }
@@ -353,12 +356,12 @@
 }
 
 .category-img {
-    width: 65% !important;
+    width: 55% !important;
     /* Breathing room (User Suggestion) */
-    height: 65% !important;
+    height: 55% !important;
     object-fit: contain !important;
     z-index: 4 !important;
-    filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.5)) !important;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5)) !important;
     /* Depth (User Suggestion) */
     transition: transform 0.3s ease !important;
 }
