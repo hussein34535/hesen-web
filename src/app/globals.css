@@ -817,9 +817,9 @@ body {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
   gap: 12px !important;
-  /* Proper layout gap */
-  padding: 12px !important;
-  /* Reduced padding */
+  /* Flutter: crossAxisSpacing: 12, mainAxisSpacing: 12 */
+  padding: 16px !important;
+  /* Flutter: horizontal: 16, vertical: 20 approx */
 }
 
 @media (min-width: 1024px) {
@@ -1001,7 +1001,80 @@ body {
   }
 }
 
-/* Bottom Navigation - Flutter Match */
+/* --- Native App Feel & Splash Screen Integration --- */
+
+/* Native App Tricks (from input) */
+body,
+html {
+  font-family: 'Cairo', 'Roboto', sans-serif !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  overscroll-behavior-y: none;
+}
+
+/* Custom Splash Screen */
+#splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #000 0%, #1a1a2e 100%);
+  z-index: 9999;
+  transition: opacity 0.5s ease-out;
+}
+
+#splash.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.logo-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(124, 82, 216, 0.6);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.loader {
+  margin-top: 40px;
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #7C52D8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;

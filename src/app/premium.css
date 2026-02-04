@@ -56,7 +56,7 @@
 
 .category-card.has-image {
     background: rgba(255, 255, 255, 0.05) !important;
-    /* Glass Effect */
+    /* Flutter: Theme.of(context).cardColor with 60% opacity overlay */
     /* Line 248 */
 }
 
@@ -65,20 +65,24 @@
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)) !important;
-    z-index: 2 !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+    z-index: 5 !important;
+    /* Above gradient, creates glass effect */
+    pointer-events: none !important;
 }
 
 .category-card::after {
     content: '' !important;
     position: absolute !important;
-    top: -20px !important;
-    right: -20px !important;
-    width: 100px !important;
-    height: 100px !important;
-    background: rgba(255, 255, 255, 0.08) !important;
+    top: -30px !important;
+    right: -30px !important;
+    width: 120px !important;
+    height: 120px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
     border-radius: 50% !important;
-    z-index: 1 !important;
+    z-index: 3 !important;
+    /* Circle decoration */
+    pointer-events: none !important;
 }
 
 /* Background Gloss & Patterns (Lines 231, 268, 774) */
@@ -97,8 +101,8 @@
     position: absolute !important;
     inset: 0 !important;
     z-index: 1 !important;
-    opacity: 0.6 !important;
-    /* Matched from Flutter Opacity(0.6) */
+    opacity: 1 !important;
+    /* Full opacity for vibrant colors like Flutter */
 }
 
 .category-card-bg.green {
@@ -146,8 +150,8 @@
     .categories-grid {
         grid-template-columns: 1fr !important;
         /* Force single column on mobile */
-        gap: 16px !important;
-        /* Tighter gap for better thumb reach */
+        gap: 12px !important;
+        /* Flutter: crossAxisSpacing: 12, mainAxisSpacing: 12 */
         padding-bottom: 90px !important;
         /* Context safe area for bottom nav */
     }
@@ -188,7 +192,8 @@
 .category-card-bg {
     position: absolute !important;
     inset: 0 !important;
-    opacity: 0.6 !important;
+    opacity: 1 !important;
+    /* Full vibrant gradient */
     z-index: 2 !important;
 }
 
@@ -244,10 +249,12 @@
     align-items: center !important;
     justify-content: center !important;
     padding: 16px !important;
-    padding: 12px !important;
-    min-height: 115px !important;
-    /* Compact Height */
-    border-radius: 20px !important;
+    padding: 16px !important;
+    /* Flutter: EdgeInsets.all(16.0) */
+    min-height: 135px !important;
+    /* Flutter: mainAxisExtent: 135 */
+    border-radius: 24px !important;
+    /* Flutter: BorderRadius.circular(24.0) */
     overflow: hidden !important;
 }
 
@@ -312,11 +319,13 @@
 /* Channel Card Tile - Source Synced (Line 734) */
 .channel-card-tile {
     position: relative !important;
-    margin: 6px 12px !important;
+    margin: 6px 10px !important;
+    /* Flutter: symmetric(horizontal: 10, vertical: 6) */
     padding: 0 16px !important;
-    height: 80px !important;
-    /* Compact Tile */
-    border-radius: 18px !important;
+    height: 95px !important;
+    /* Flutter: mainAxisExtent: 95 */
+    border-radius: 22px !important;
+    /* Flutter: BorderRadius.circular(22) */
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)) !important;
     border: 1.2px solid rgba(255, 255, 255, 0.1) !important;
     display: flex !important;
