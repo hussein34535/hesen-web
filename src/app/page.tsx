@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import CategoryCard from '@/components/ChannelCard';
+import Skeleton from '@/components/Skeleton';
+import { Search } from 'lucide-react';
 
 interface Channel {
   id: string;
@@ -20,6 +22,8 @@ interface Category {
 
 export default function HomePage() {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -32,6 +36,7 @@ export default function HomePage() {
 
         if (data.success) {
           setCategories(data.data || []);
+          setFilteredCategories(data.data || []);
         } else {
           throw new Error('API error');
         }
@@ -45,43 +50,78 @@ export default function HomePage() {
     loadChannels();
   }, []);
 
+  // Filter categories whenever search query changes
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setFilteredCategories(categories);
+      return;
+    }
+
+    const query = searchQuery.toLowerCase();
+    const filtered = categories.filter(cat => {
+      // Match category name
+      if (cat.name.toLowerCase().includes(query)) return true;
+      // Match any channel name within the category
+      return cat.channels?.some(ch => ch.name.toLowerCase().includes(query));
+    });
+    setFilteredCategories(filtered);
+  }, [searchQuery, categories]);
+
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="spinner" />
+      <div className="page-fade-in" style={{ padding: '0 16px' }}>
+        <div style={{ padding: '16px 0' }}>
+          <Skeleton width="100%" height="48px" borderRadius="12px" style={{ marginBottom: '24px' }} />
+        </div>
+        <div className="channels-grid">
+          {[...Array(6)].map((_, i) => (
+            <Skeleton key={i} height="135px" borderRadius="24px" />
+          ))}
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="error-container fade-in">
+      <div className="error-container page-fade-in">
         <p className="error-text">{error}</p>
-        <button
-          onClick={() => window.location.reload()}
-          className="retry-btn"
-        >
+        <button onClick={() => window.location.reload()} className="retry-btn">
           إعادة المحاولة
         </button>
       </div>
     );
   }
 
-  if (categories.length === 0) {
-    return (
-      <div className="empty-state fade-in">
-        <p>لا توجد قنوات متاحة</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="fade-in" style={{ padding: '0 16px' }}>
-      <div className="channels-grid">
-        {categories.map((category) => (
-          <CategoryCard key={category.id} category={category} />
-        ))}
+    <div className="page-fade-in" style={{ padding: '0 12px' }}>
+      {/* Search Bar - Matching Flutter's _buildSearchBar */}
+      <div className="search-container">
+        <div className="search-bar">
+          <Search className="search-icon" size={20} color="#B81CB0" />
+          <input
+            type="text"
+            placeholder="بحث عن قناة..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button className="clear-btn" onClick={() => setSearchQuery('')}>✕</button>
+          )}
+        </div>
       </div>
+
+      {filteredCategories.length === 0 ? (
+        <div className="empty-state">
+          <p>لا توجد نتائج للبحث</p>
+        </div>
+      ) : (
+        <div className="channels-grid">
+          {filteredCategories.map((category) => (
+            <CategoryCard key={category.id} category={category} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

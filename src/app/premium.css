@@ -1,0 +1,775 @@
+/* 100% Flutter Parity - Absolute Replication Layer */
+
+/* Category Card - Source Synced (Line 202) */
+.category-card {
+    position: relative !important;
+    border-radius: 24px !important;
+    border: 1.2px solid rgba(255, 255, 255, 0.15) !important;
+    /* Line 206 */
+    overflow: hidden !important;
+    height: 135px !important;
+    background: #1C1C1D !important;
+    /* DarkCardColor Match */
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2) !important;
+    /* Line 211 */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    z-index: 1 !important;
+}
+
+/* Glass Overlay - Exact LinearGradient (Lines 231-238) */
+.category-card::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)) !important;
+    z-index: 2 !important;
+}
+
+.category-card::after {
+    content: '' !important;
+    position: absolute !important;
+    top: -20px !important;
+    right: -20px !important;
+    width: 100px !important;
+    height: 100px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 50% !important;
+    z-index: 1 !important;
+}
+
+/* Background Gloss & Patterns (Lines 231, 268, 774) */
+.glossy-highlight {
+    position: absolute !important;
+    top: 0 !important;
+    left: 20px !important;
+    right: 20px !important;
+    height: 1.5px !important;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent) !important;
+    z-index: 5 !important;
+}
+
+.category-card-bg-glass {
+    position: absolute !important;
+    inset: 0 !important;
+    /* Line 235: White with alpha 0.12 and 0.05 */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)) !important;
+    z-index: 3 !important;
+}
+
+.category-card-pattern {
+    position: absolute !important;
+    top: -20px !important;
+    right: -20px !important;
+    width: 100px !important;
+    height: 100px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50% !important;
+    z-index: 4 !important;
+}
+
+/* Background Color Layer - Exact SweepGradient Emulation (Line 245) */
+.category-card-bg {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0.6 !important;
+    z-index: 2 !important;
+}
+
+.category-card-bg.green {
+    background: conic-gradient(from 0deg at 0% 0%, #00C853, #2E7D32, #1B5E20, #00C853) !important;
+}
+
+.category-card-bg.red {
+    background: conic-gradient(from 0deg at 0% 0%, #FF1744, #C62828, #B71C1C, #FF1744) !important;
+}
+
+.category-card-bg.blue {
+    background: conic-gradient(from 0deg at 0% 0%, #2979FF, #1565C0, #0D47A1, #2979FF) !important;
+}
+
+.category-card-bg.purple {
+    background: conic-gradient(from 0deg at 0% 0%, #D500F9, #7B1FA2, #4A148C, #D500F9) !important;
+}
+
+.category-card-bg.orange {
+    background: conic-gradient(from 0deg at 0% 0%, #FF9100, #EF6C00, #E65100, #FF9100) !important;
+}
+
+.category-card-bg.pink {
+    background: conic-gradient(from 0deg at 0% 0%, #F50057, #C2185B, #880E4F, #F50057) !important;
+}
+
+.category-card-bg.bein {
+    background: conic-gradient(from 0deg at 0% 0%, #9067C6, #673AB7, #240046, #9067C6) !important;
+}
+
+.category-card-bg.default {
+    background: conic-gradient(from 0deg at 0% 0%, #7E57C2, #673AB7, #512DA8, #7E57C2) !important;
+}
+
+.category-card:hover {
+    transform: scale(1.03) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.category-card:active {
+    transform: scale(0.95) !important;
+}
+
+/* Category Card Content (Lines 282-369) */
+.category-card-content {
+    position: relative !important;
+    z-index: 3 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Icon Container (Lines 314-338) */
+/* Category Screen - Source Synced (Line 461) */
+.category-screen {
+    min-height: 100vh !important;
+    background: #000 !important;
+}
+
+.category-header {
+    position: relative !important;
+    height: 120px !important;
+    background: linear-gradient(to bottom, #673AB7, #512DA8) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+.category-header .back-btn {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    /* RTL - top right for Arabic back button */
+    z-index: 10 !important;
+    cursor: pointer !important;
+}
+
+.category-title {
+    color: white !important;
+    font-size: 20px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1px !important;
+    z-index: 5 !important;
+    margin-top: 10px !important;
+}
+
+.header-icon-center {
+    width: 50px !important;
+    height: 50px !important;
+    z-index: 5 !important;
+}
+
+.header-icon-center img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+
+/* Category Card Content Refinement */
+.category-icon-container {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    z-index: 4 !important;
+}
+
+/* Channel Card Tile - Source Synced (Line 734) */
+.channel-card-tile {
+    position: relative !important;
+    margin: 6px 10px !important;
+    padding: 12px 20px !important;
+    height: 95px !important;
+    border-radius: 22px !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)) !important;
+    border: 1.2px solid rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+.channel-card-tile:hover {
+    transform: scale(1.02) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.channel-card-tile:active {
+    transform: scale(0.96) !important;
+}
+
+.channel-card-content-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    z-index: 4 !important;
+}
+
+.channel-info-stack {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    flex: 1 !important;
+}
+
+.channel-tile-name {
+    font-size: 19px !important;
+    font-weight: 900 !important;
+    color: #E1BEE7 !important;
+    /* Deselected state (Line 833) */
+    letter-spacing: 0.2px !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+.premium-badge-row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    background: rgba(255, 193, 7, 0.15) !important;
+    /* Amber 0.15 (Line 857) */
+    padding: 2px 8px !important;
+    border-radius: 8px !important;
+    border: 0.5px solid rgba(255, 193, 7, 0.3) !important;
+    color: #FFD54F !important;
+    /* Amber[300] */
+    font-size: 9px !important;
+    font-weight: 900 !important;
+    letter-spacing: 1.0px !important;
+}
+
+.play-indicator-circle {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: white !important;
+    transition: all 0.3s ease !important;
+}
+
+.channel-card-tile:hover .play-indicator-circle {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.icon-circle {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: white !important;
+}
+
+@media (min-width: 1024px) {
+    .icon-circle {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .icon-circle svg {
+        width: 48px !important;
+        height: 48px !important;
+    }
+}
+
+/* Category Name (Lines 342-367) */
+.category-name {
+    font-size: 15px !important;
+    font-weight: 900 !important;
+    color: white !important;
+    margin-top: 14px !important;
+    text-align: center !important;
+    z-index: 4 !important;
+    letter-spacing: 0.5px !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.38) !important;
+}
+
+@media (min-width: 1024px) {
+    .category-name {
+        font-size: 22px !important;
+        margin-top: 16px !important;
+    }
+}
+
+/* Premium Tag - Exact Gradient (Lines 382-384) */
+.premium-tag {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: linear-gradient(to right, #FFD700, #FFA000) !important;
+    padding: 3px 10px !important;
+    border-radius: 12px !important;
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    z-index: 10 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+    text-transform: uppercase !important;
+}
+
+.premium-tag svg {
+    fill: black !important;
+}
+
+/* Match Card Redesign */
+.match-card {
+    background: linear-gradient(135deg, #141414, #000000) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    margin: 8px !important;
+    transition: all 0.2s ease-out !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.match-card:hover {
+    transform: scale(1.02) !important;
+    border-color: #673AB7 !important;
+    box-shadow: 0 0 15px rgba(103, 58, 183, 0.4) !important;
+}
+
+.match-teams {
+    padding: 24px 16px 8px 16px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.match-team-logo {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain !important;
+    margin-bottom: 6px !important;
+}
+
+.match-team-name {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: white !important;
+}
+
+.match-center-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex: 1 !important;
+}
+
+.match-status-badge {
+    padding: 4px 12px !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: white !important;
+    background: #2196F3 !important;
+}
+
+.match-status-badge.live {
+    background: #F44336 !important;
+}
+
+.match-status-badge.finished {
+    background: #424242 !important;
+}
+
+.match-champion-badge {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    background: rgba(33, 150, 243, 0.5) !important;
+    color: white !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    padding: 4px 20px 6px 20px !important;
+    clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 100%, 0 100%) !important;
+    white-space: nowrap !important;
+    z-index: 10 !important;
+}
+
+.match-champion-badge.live {
+    background: rgba(244, 67, 54, 0.5) !important;
+}
+
+.match-champion-badge.finished {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Header & Avatar */
+.header {
+    background: #673AB7 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
+    height: 70px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 16px !important;
+    justify-content: space-between !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+}
+
+.username-gradient {
+    background: linear-gradient(to right, #1565C0, #512DA8, #2196F3) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-weight: 900 !important;
+    font-size: 22px !important;
+}
+
+/* Modal Bottom Sheet / Drawer Emulation */
+.modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    z-index: 2000 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    animation: fadeIn 0.3s ease !important;
+}
+
+.modal-content {
+    width: 100% !important;
+    max-width: 500px !important;
+    background: #1C1C1C !important;
+    border-radius: 24px 24px 0 0 !important;
+    padding: 20px 0 !important;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5) !important;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+}
+
+.menu-item {
+    display: flex !important;
+    align-items: center !important;
+    padding: 14px 24px !important;
+    gap: 16px !important;
+    color: white !important;
+    text-decoration: none !important;
+    transition: background 0.2s !important;
+    cursor: pointer !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    text-align: right !important;
+    font-family: 'Cairo', sans-serif !important;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.menu-item svg {
+    color: #B81CB0 !important;
+    /* Secondary color from Flutter */
+}
+
+.menu-item-text {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    flex: 1 !important;
+}
+
+.menu-divider {
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    margin: 8px 0 !important;
+}
+
+/* Telegram Dialog Style */
+.dialog-container {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 400px !important;
+    background: #1C1C1C !important;
+    border-radius: 24px !important;
+    border: 1.5px solid rgba(184, 28, 176, 0.2) !important;
+    padding: 24px !important;
+    z-index: 2100 !important;
+    text-align: center !important;
+    animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.dialog-title {
+    font-size: 22px !important;
+    font-weight: normal !important;
+    color: white !important;
+    margin-bottom: 16px !important;
+}
+
+.dialog-title b {
+    color: #B81CB0 !important;
+    font-size: 26px !important;
+    font-weight: 900 !important;
+}
+
+.dialog-subtitle {
+    font-size: 16px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    line-height: 1.5 !important;
+    margin-bottom: 24px !important;
+}
+
+.dialog-actions {
+    display: flex !important;
+    gap: 12px !important;
+}
+
+.dialog-btn {
+    flex: 1 !important;
+    padding: 14px !important;
+    border-radius: 14px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    border: none !important;
+}
+
+.dialog-btn-close {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dialog-btn-action {
+    background: #B81CB0 !important;
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.avatar-container {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    padding: 2px !important;
+    background: linear-gradient(135deg, #616161, #212121) !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.avatar-container.premium-ring {
+    background: linear-gradient(135deg, #FFC107, #FF8F00) !important;
+}
+
+.avatar-main {
+    width: 100% !important;
+    height: 100% !important;
+    background: #121212 !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+.avatar-initial {
+    color: white !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+}
+
+.days-badge {
+    position: absolute !important;
+    bottom: -8px !important;
+    left: -2px !important;
+    background: #00C853 !important;
+    border: 2px solid white !important;
+    border-radius: 12px !important;
+    padding: 1px 8px !important;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+@keyframes pulse {
+    from {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.live-dot {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    margin-right: 6px;
+    display: inline-block;
+    animation: pulse 1s infinite alternate;
+}
+
+/* News & Goal Cards - Exact Vertical Match */
+.news-card,
+.video-card {
+    background: #1C1C1C !important;
+    border-radius: 25px !important;
+    margin: 10px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.2s ease-out !important;
+    display: flex !important;
+    flex-direction: column !important;
+    text-decoration: none !important;
+}
+
+.news-card:hover,
+.video-card:hover {
+    transform: scale(1.02) !important;
+}
+
+.news-thumbnail-container,
+.video-thumbnail {
+    position: relative !important;
+    width: 100% !important;
+    height: 180px !important;
+    overflow: hidden !important;
+}
+
+.news-image,
+.video-thumbnail img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+}
+
+.news-content,
+.video-info {
+    padding: 16px !important;
+}
+
+.news-title,
+.video-title {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: white !important;
+    line-height: 1.3 !important;
+    margin: 0 0 8px 0 !important;
+}
+
+.news-divider,
+.video-divider {
+    height: 1px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    margin: 12px 0 !important;
+}
+
+.news-date,
+.video-meta {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    color: #9e9e9e !important;
+}
+
+.video-play-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.play-button {
+    width: 64px !important;
+    height: 64px !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 2px solid white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: white !important;
+}
+
+.premium-badge-absolute {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    background: #FFC107 !important;
+    padding: 5px 10px !important;
+    border-radius: 12px !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    z-index: 5 !important;
+}

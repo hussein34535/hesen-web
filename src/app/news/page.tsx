@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import NewsCard from '@/components/NewsCard';
+import Skeleton from '@/components/Skeleton';
 
 interface NewsArticle {
     id: string;
@@ -40,15 +41,20 @@ export default function NewsPage() {
 
     if (loading) {
         return (
-            <div className="loading-container">
-                <div className="spinner" />
+            <div className="page-fade-in" style={{ padding: '0 16px' }}>
+                <Skeleton width="150px" height="28px" style={{ marginBottom: '24px' }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    {[...Array(5)].map((_, i) => (
+                        <Skeleton key={i} height="120px" borderRadius="20px" />
+                    ))}
+                </div>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="error-container fade-in">
+            <div className="error-container page-fade-in">
                 <p className="error-text">{error}</p>
                 <button onClick={() => window.location.reload()} className="retry-btn">
                     إعادة المحاولة
@@ -59,16 +65,15 @@ export default function NewsPage() {
 
     if (news.length === 0) {
         return (
-            <div className="empty-state fade-in">
+            <div className="empty-state page-fade-in">
                 <p>لا توجد أخبار متاحة</p>
             </div>
         );
     }
 
     return (
-        <div className="fade-in" style={{ padding: '0 16px' }}>
-            <h1 className="page-title">آخر الأخبار</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="page-fade-in" style={{ padding: '0 4px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
                 {news.map((article) => (
                     <NewsCard key={article.id} article={article} />
                 ))}

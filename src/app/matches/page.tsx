@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import MatchCard from '@/components/MatchCard';
+import Skeleton from '@/components/Skeleton';
 
 interface StreamLink {
     name: string;
@@ -59,15 +60,20 @@ export default function MatchesPage() {
 
     if (loading) {
         return (
-            <div className="loading-container">
-                <div className="spinner" />
+            <div className="page-fade-in" style={{ padding: '0 16px' }}>
+                <Skeleton width="120px" height="28px" style={{ marginBottom: '24px' }} />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    {[...Array(4)].map((_, i) => (
+                        <Skeleton key={i} height="200px" borderRadius="20px" />
+                    ))}
+                </div>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="error-container fade-in">
+            <div className="error-container page-fade-in">
                 <p className="error-text">{error}</p>
                 <button onClick={() => window.location.reload()} className="retry-btn">
                     إعادة المحاولة
@@ -78,16 +84,15 @@ export default function MatchesPage() {
 
     if (matches.length === 0) {
         return (
-            <div className="empty-state fade-in">
+            <div className="empty-state page-fade-in">
                 <p>لا توجد مباريات متاحة</p>
             </div>
         );
     }
 
     return (
-        <div className="fade-in" style={{ padding: '0 16px' }}>
-            <h1 className="page-title">المباريات</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="page-fade-in" style={{ padding: '0 8px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {matches.map((match) => (
                     <MatchCard key={match.id} match={match} />
                 ))}

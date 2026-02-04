@@ -1,67 +1,72 @@
 'use client';
 
-import { User, LogOut, Crown, Settings } from 'lucide-react';
+import Header from '../../components/Header';
+import BottomNav from '../../components/BottomNav';
+import { User, LogOut, Settings, CreditCard, Shield } from 'lucide-react';
 
 export default function ProfilePage() {
-    // TODO: Implement Firebase auth state
-    const isLoggedIn = false;
-    const user = null;
+    const userName = "المستخدم";
+    const isSubscribed = true;
+    const daysRemaining = 25;
 
     return (
-        <div className="px-4 py-4 fade-in">
-            <h1 className="text-2xl font-bold mb-6">الملف الشخصي</h1>
-
-            {!isLoggedIn ? (
-                <div className="text-center py-12">
-                    {/* Guest Avatar */}
-                    <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-[var(--primary)] to-purple-900 flex items-center justify-center mb-6">
-                        <User size={48} className="text-white" />
-                    </div>
-
-                    <h2 className="text-xl font-bold mb-2">مرحباً بك</h2>
-                    <p className="text-[var(--muted)] mb-6">سجل دخولك للوصول لجميع المميزات</p>
-
-                    <button className="px-8 py-3 bg-[var(--primary)] rounded-full text-white font-bold hover:bg-[var(--primary-light)] transition-colors">
-                        تسجيل الدخول
-                    </button>
-                </div>
-            ) : (
-                <div className="space-y-6">
-                    {/* User Info */}
-                    <div className="glass-card p-6 text-center">
-                        <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-[var(--primary)] to-purple-900 flex items-center justify-center mb-4">
-                            <User size={40} className="text-white" />
+        <div className="app-container">
+            <Header />
+            <main className="page-content" style={{ padding: '30px 20px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '40px' }}>
+                    <div className={`avatar-container ${isSubscribed ? 'premium-ring' : ''}`} style={{ width: '120px', height: '120px' }}>
+                        <div className="avatar-main" style={{ background: '#1C1C1C' }}>
+                            <span style={{ fontSize: '48px', color: isSubscribed ? '#FFD700' : 'white', fontWeight: 'bold' }}>
+                                {userName[0].toUpperCase()}
+                            </span>
                         </div>
-                        <h2 className="text-xl font-bold">الاسم</h2>
-                        <p className="text-[var(--muted)]">email@example.com</p>
-                    </div>
-
-                    {/* Subscription */}
-                    <div className="glass-card p-4">
-                        <div className="flex items-center gap-3">
-                            <Crown className="text-amber-500" size={24} />
-                            <div>
-                                <h3 className="font-bold">الاشتراك</h3>
-                                <p className="text-sm text-[var(--muted)]">غير مشترك</p>
+                        {isSubscribed && (
+                            <div className="days-badge" style={{ bottom: '-10px', padding: '4px 12px', fontSize: '14px' }}>
+                                {daysRemaining} يوم متبقي
                             </div>
+                        )}
+                    </div>
+                    <h2 style={{ marginTop: '24px', fontSize: '24px', fontWeight: '900', color: 'white' }}>{userName}</h2>
+                    {isSubscribed && (
+                        <div style={{
+                            background: 'linear-gradient(to right, #FFD700, #FFA000)',
+                            color: 'black',
+                            padding: '4px 16px',
+                            borderRadius: '20px',
+                            fontSize: '12px',
+                            fontWeight: 'bold',
+                            marginTop: '8px',
+                            textTransform: 'uppercase'
+                        }}>
+                            Premium Member
                         </div>
-                    </div>
-
-                    {/* Settings */}
-                    <div className="glass-card p-4">
-                        <button className="flex items-center gap-3 w-full">
-                            <Settings size={24} />
-                            <span>الإعدادات</span>
-                        </button>
-                    </div>
-
-                    {/* Logout */}
-                    <button className="glass-card p-4 flex items-center gap-3 w-full text-red-400 hover:bg-red-500/10 transition-colors">
-                        <LogOut size={24} />
-                        <span>تسجيل الخروج</span>
-                    </button>
+                    )}
                 </div>
-            )}
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {[
+                        { icon: <CreditCard size={20} />, label: "إدارة الاشتراك", color: "#FFD700" },
+                        { icon: <Settings size={20} />, label: "إعدادات الحساب", color: "white" },
+                        { icon: <Shield size={20} />, label: "الأمان والخصوصية", color: "white" },
+                        { icon: <LogOut size={20} />, label: "تسجيل الخروج", color: "#F44336" },
+                    ].map((item, index) => (
+                        <div key={index} style={{
+                            background: '#1C1C1C',
+                            padding: '18px 24px',
+                            borderRadius: '16px',
+                            display: 'flex',
+                            gap: '16px',
+                            alignItems: 'center',
+                            border: '1px solid rgba(255,255,255,0.05)',
+                            cursor: 'pointer'
+                        }}>
+                            <div style={{ color: item.color }}>{item.icon}</div>
+                            <span style={{ fontSize: '16px', fontWeight: '700', color: item.color }}>{item.label}</span>
+                        </div>
+                    ))}
+                </div>
+            </main>
+            <BottomNav />
         </div>
     );
 }

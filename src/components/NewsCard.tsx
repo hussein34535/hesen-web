@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Play } from 'lucide-react';
+import { Play, Clock } from 'lucide-react';
 
 interface NewsArticle {
     id: string;
@@ -20,25 +20,9 @@ export default function NewsCard({ article }: NewsCardProps) {
     const hasVideo = article.videoUrl && article.videoUrl.length > 0;
 
     const content = (
-        <div
-            className="news-card"
-            style={{
-                borderRadius: '25px',
-                transition: 'all 0.2s ease-out',
-            }}
-            onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.02)';
-                e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                e.currentTarget.style.boxShadow = '0 8px 30px rgba(103, 58, 183, 0.3)';
-            }}
-            onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.borderColor = 'var(--border-color)';
-                e.currentTarget.style.boxShadow = 'none';
-            }}
-        >
-            {/* Image */}
-            <div style={{ position: 'relative' }}>
+        <div className="news-card fade-in">
+            {/* Image / Thumbnail */}
+            <div className="news-thumbnail-container">
                 <img
                     src={article.image || '/no-image.png'}
                     alt={article.title}
@@ -49,16 +33,10 @@ export default function NewsCard({ article }: NewsCardProps) {
                     }}
                 />
                 {hasVideo && (
-                    <div style={{
-                        position: 'absolute',
-                        inset: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        background: 'rgba(0, 0, 0, 0.4)',
-                        borderRadius: '12px'
-                    }}>
-                        <Play size={24} fill="white" color="white" />
+                    <div className="video-play-overlay">
+                        <div className="play-button" style={{ width: '40px', height: '40px' }}>
+                            <Play size={20} fill="currentColor" />
+                        </div>
                     </div>
                 )}
             </div>
@@ -66,11 +44,12 @@ export default function NewsCard({ article }: NewsCardProps) {
             {/* Content */}
             <div className="news-content">
                 <h3 className="news-title">{article.title}</h3>
-                {article.description && (
-                    <p className="news-description">{article.description}</p>
-                )}
+                <div className="news-divider" />
                 {article.createdAt && (
-                    <span className="news-date">{article.createdAt}</span>
+                    <div className="news-date">
+                        <Clock size={14} />
+                        <span>{article.createdAt}</span>
+                    </div>
                 )}
             </div>
         </div>
@@ -81,6 +60,7 @@ export default function NewsCard({ article }: NewsCardProps) {
             <Link
                 href={`/player?url=${encodeURIComponent(article.videoUrl!)}&name=${encodeURIComponent(article.title)}`}
                 style={{ textDecoration: 'none' }}
+                className="news-card-link"
             >
                 {content}
             </Link>
@@ -89,3 +69,4 @@ export default function NewsCard({ article }: NewsCardProps) {
 
     return content;
 }
+

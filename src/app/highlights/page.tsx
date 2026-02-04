@@ -65,8 +65,7 @@ export default function HighlightsPage() {
     }
 
     return (
-        <div className="fade-in" style={{ padding: '0 16px' }}>
-            <h1 className="page-title">الملخصات</h1>
+        <div className="fade-in" style={{ padding: '0 4px' }}>
             <div className="videos-grid">
                 {highlights.map((highlight) => (
                     <HighlightCard key={highlight.id} highlight={highlight} />

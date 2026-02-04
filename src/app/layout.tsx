@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import Header from '@/components/Header';
-import BottomNav from '@/components/BottomNav';
+import './premium.css';
+import Header from '../components/Header';
+import BottomNav from '../components/BottomNav';
 
 export const metadata: Metadata = {
   title: '7eSen TV',

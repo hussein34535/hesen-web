@@ -31,29 +31,55 @@ interface Category {
     }[];
 }
 
+// Helper to extract URL from string or object
+function getImageUrl(image: string | { url?: string } | undefined | null): string {
+    if (!image) return '';
+    if (typeof image === 'string') return image;
+    if (typeof image === 'object' && image.url) return image.url;
+    return '';
+}
+
 export async function GET() {
     try {
-        const res = await fetch(`${BASE_URL}/channels`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            next: { revalidate: 60 }
-        });
+        // Fetch both channels and categories in parallel
+        const [channelsRes, categoriesRes] = await Promise.all([
+            fetch(`${BASE_URL}/channels`, {
+                headers: { 'Content-Type': 'application/json' },
+                next: { revalidate: 60 }
+            }),
+            fetch(`${BASE_URL}/categories`, {
+                headers: { 'Content-Type': 'application/json' },
+                next: { revalidate: 60 }
+            })
+        ]);
 
-        if (!res.ok) {
-            return Response.json({ success: false, error: 'Failed to fetch' }, { status: res.status });
+        if (!channelsRes.ok) {
+            return Response.json({ success: false, error: 'Failed to fetch channels' }, { status: channelsRes.status });
         }
 
-        const data = await res.json();
+        const channelsData = await channelsRes.json();
 
-        if (!data.success || !Array.isArray(data.data)) {
+        // Build category image map from categories API
+        const categoryImageMap = new Map<string, string>();
+        if (categoriesRes.ok) {
+            const categoriesData = await categoriesRes.json();
+            if (categoriesData.success && Array.isArray(categoriesData.data)) {
+                for (const cat of categoriesData.data) {
+                    if (cat.id && cat.image) {
+                        categoryImageMap.set(String(cat.id), getImageUrl(cat.image));
+                    }
+                }
+            }
+        }
+
+        if (!channelsData.success || !Array.isArray(channelsData.data)) {
             return Response.json({ success: false, error: 'Invalid data format' }, { status: 500 });
         }
 
         // Group channels by category
         const categoryMap = new Map<string, Category>();
 
-        for (const channel of data.data as ApiChannel[]) {
+        for (const channel of channelsData.data as ApiChannel[]) {
             // Get first stream URL
             const streamUrl = channel.stream_link?.[0]?.url || '';
             const isPremium = channel.stream_link?.some(l => l.is_premium);
@@ -67,6 +93,7 @@ export async function GET() {
                         categoryMap.set(catId, {
                             id: catId,
                             name: cat.name,
+                            image: categoryImageMap.get(catId) || undefined,
                             is_premium: cat.is_premium,
                             channels: []
                         });
@@ -75,7 +102,7 @@ export async function GET() {
                     categoryMap.get(catId)!.channels.push({
                         id: channel.id,
                         name: channel.name,
-                        logo: channel.logo || channel.image || '',
+                        logo: getImageUrl(channel.logo) || getImageUrl(channel.image),
                         streamUrl: streamUrl,
                         is_premium: isPremium
                     });
@@ -93,7 +120,7 @@ export async function GET() {
                 categoryMap.get(generalId)!.channels.push({
                     id: channel.id,
                     name: channel.name,
-                    logo: channel.logo || channel.image || '',
+                    logo: getImageUrl(channel.logo) || getImageUrl(channel.image),
                     streamUrl: streamUrl,
                     is_premium: isPremium
                 });
