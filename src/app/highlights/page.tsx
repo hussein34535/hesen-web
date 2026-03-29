@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import HighlightCard from '@/components/HighlightCard';
+import { GlassFilter } from '@/components/ChannelCard';
+import { useSearch } from '@/context/SearchContext';
 
 interface Highlight {
     id: string;
@@ -12,6 +14,7 @@ interface Highlight {
 }
 
 export default function HighlightsPage() {
+    const { searchQuery } = useSearch();
     const [highlights, setHighlights] = useState<Highlight[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -37,6 +40,14 @@ export default function HighlightsPage() {
         loadHighlights();
     }, []);
 
+    const filteredHighlights = useMemo(() => {
+        if (!searchQuery.trim()) return highlights;
+        const query = searchQuery.toLowerCase();
+        return highlights.filter(h =>
+            h.title.toLowerCase().includes(query)
+        );
+    }, [searchQuery, highlights]);
+
     if (loading) {
         return (
             <div className="loading-container">
@@ -56,21 +67,20 @@ export default function HighlightsPage() {
         );
     }
 
-    if (highlights.length === 0) {
-        return (
-            <div className="empty-state fade-in">
-                <p>لا توجد ملخصات متاحة</p>
-            </div>
-        );
-    }
-
     return (
         <div className="fade-in" style={{ padding: '0 4px' }}>
-            <div className="videos-grid">
-                {highlights.map((highlight) => (
-                    <HighlightCard key={highlight.id} highlight={highlight} />
-                ))}
-            </div>
+            {filteredHighlights.length === 0 ? (
+                <div className="empty-state">
+                    <p>لا توجد ملخصات تطابق بحثك</p>
+                </div>
+            ) : (
+                <div className="videos-grid">
+                    {filteredHighlights.map((highlight) => (
+                        <HighlightCard key={highlight.id} highlight={highlight} />
+                    ))}
+                </div>
+            )}
+            <GlassFilter />
         </div>
     );
 }

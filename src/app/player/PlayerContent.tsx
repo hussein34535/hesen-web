@@ -36,15 +36,28 @@ export default function PlayerContent() {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
+    const [volume, setVolume] = useState(1);
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [isPiP, setIsPiP] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [showControls, setShowControls] = useState(true);
+
+    // Volume Persistence
+    useEffect(() => {
+        const savedVolume = localStorage.getItem('player_volume');
+        if (savedVolume !== null) {
+            const vol = parseFloat(savedVolume);
+            setVolume(vol);
+            setIsMuted(vol === 0);
+        }
+    }, []);
 
     useEffect(() => {
         if (!url || !videoRef.current) return;
 
         const video = videoRef.current;
+        video.volume = volume;
 
         // Check if URL is HLS
         if (url.includes('.m3u8')) {
@@ -53,6 +66,11 @@ export default function PlayerContent() {
                 const hls = new Hls({
                     enableWorker: true,
                     lowLatencyMode: true,
+                    backBufferLength: 60,
+                    maxBufferLength: 30,
+                    maxMaxBufferLength: 60,
+                    manifestLoadingMaxRetry: 4,
+                    levelLoadingMaxRetry: 4,
                 });
                 hlsRef.current = hls;
 
@@ -66,8 +84,18 @@ export default function PlayerContent() {
 
                 hls.on(Hls.Events.ERROR, (_, data) => {
                     if (data.fatal) {
-                        setError('فشل تحميل البث');
-                        setIsLoading(false);
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                hls.startLoad();
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                setError('فشل تحميل البث');
+                                setIsLoading(false);
+                                break;
+                        }
                     }
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -94,10 +122,18 @@ export default function PlayerContent() {
             setIsLoading(false);
         });
 
+        // Track PiP changes
+        const onEnterPiP = () => setIsPiP(true);
+        const onLeavePiP = () => setIsPiP(false);
+        video.addEventListener('enterpictureinpicture', onEnterPiP);
+        video.addEventListener('leavepictureinpicture', onLeavePiP);
+
         return () => {
             if (hlsRef.current) {
                 hlsRef.current.destroy();
             }
+            video.removeEventListener('enterpictureinpicture', onEnterPiP);
+            video.removeEventListener('leavepictureinpicture', onLeavePiP);
         };
     }, [url]);
 
@@ -122,8 +158,38 @@ export default function PlayerContent() {
 
     const toggleMute = () => {
         if (videoRef.current) {
-            videoRef.current.muted = !isMuted;
-            setIsMuted(!isMuted);
+            const newMute = !isMuted;
+            videoRef.current.muted = newMute;
+            setIsMuted(newMute);
+            if (!newMute && volume === 0) {
+                setVolume(1);
+                videoRef.current.volume = 1;
+                localStorage.setItem('player_volume', '1');
+            }
+        }
+    };
+
+    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseFloat(e.target.value);
+        if (videoRef.current) {
+            videoRef.current.volume = value;
+            videoRef.current.muted = value === 0;
+            setVolume(value);
+            setIsMuted(value === 0);
+            localStorage.setItem('player_volume', value.toString());
+        }
+    };
+
+    const togglePiP = async () => {
+        if (!videoRef.current) return;
+        try {
+            if (document.pictureInPictureElement) {
+                await document.exitPictureInPicture();
+            } else if (document.pictureInPictureEnabled) {
+                await videoRef.current.requestPictureInPicture();
+            }
+        } catch (e) {
+            console.error('PiP error:', e);
         }
     };
 
@@ -216,14 +282,40 @@ export default function PlayerContent() {
                         </button>
 
                         {/* Bottom Controls */}
-                        <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between">
-                            <button onClick={toggleMute} className="p-2 hover:bg-white/10 rounded-full">
-                                {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
-                            </button>
+                        <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between bg-gradient-to-t from-black/90 to-transparent">
+                            <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-2 group/volume">
+                                    <button onClick={toggleMute} className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                                        {isMuted || volume === 0 ? <VolumeX size={24} /> : <Volume2 size={24} />}
+                                    </button>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        step="0.1"
+                                        value={isMuted ? 0 : volume}
+                                        onChange={handleVolumeChange}
+                                        className="w-0 group-hover/volume:w-24 transition-all duration-300 accent-[var(--primary)] cursor-pointer"
+                                    />
+                                </div>
+                            </div>
 
-                            <button onClick={toggleFullscreen} className="p-2 hover:bg-white/10 rounded-full">
-                                {isFullscreen ? <Minimize2 size={24} /> : <Maximize2 size={24} />}
-                            </button>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    onClick={togglePiP}
+                                    className={`p-2 hover:bg-white/10 rounded-full transition-colors ${isPiP ? 'text-[var(--primary)]' : ''}`}
+                                    title="Picture in Picture"
+                                >
+                                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M8 4.5v5H3m-1.87 0h19.74c.6 0 1.13.43 1.13 1.3v9c0 .87-.53 1.3-1.13 1.3H1.13C.53 21.1 0 20.67 0 19.8v-9c0-.87.53-1.3 1.13-1.3z" />
+                                        <path d="M13 11h7v6h-7z" />
+                                    </svg>
+                                </button>
+
+                                <button onClick={toggleFullscreen} className="p-2 hover:bg-white/10 rounded-full transition-colors">
+                                    {isFullscreen ? <Minimize2 size={24} /> : <Maximize2 size={24} />}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}

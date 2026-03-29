@@ -1,140 +1,306 @@
 /* 100% Flutter Parity - Absolute Replication Layer */
 
-.category-card,
-.video-card,
-.match-card {
+/* ══════════════════════════════════════════════════════════════════════════════
+   🖤 Premium Dark Glass - 3-Layer Technique 🖤
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+    --glass-bg: rgba(0, 0, 0, 0.15);
+    /* Josh Comeau: Keep it very subtle */
+    --glass-highlight: rgba(255, 255, 255, 0.2);
+    --glass-specular: rgba(255, 255, 255, 0.1);
+}
+
+.category-card {
     position: relative;
     width: 100%;
-    /* aspect-ratio: 1 / 0.8; REMOVED to let content dictate height like Flutter */
-    height: auto;
-    border-radius: 24px !important;
-    /* Elevation 4 Layered Shadow (Replica from Flutter) */
-    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2),
-        0px 7px 10px 1px rgba(0, 0, 0, 0.14),
-        0px 2px 16px 1px rgba(0, 0, 0, 0.12) !important;
-    border: 1.2px solid rgba(255, 255, 255, 0.15) !important;
-    background: #000000;
+    min-height: 135px !important;
+    padding: 16px;
+    border-radius: 28px !important;
+    /* Unified radius */
+    background: transparent !important;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 150ms cubic-bezier(0.215, 0.61, 0.355, 1) !important;
-    /* easeOutCubic approx */
-    backdrop-filter: blur(4px);
-    text-decoration: none;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     z-index: 1;
 }
 
-.category-card:hover,
-.video-card:hover,
-.match-card:hover {
-    transform: scale(1.03) !important;
-    z-index: 10 !important;
-}
-
-.category-card:active {
-    transform: scale(0.92) !important;
-    /* Deeper press (User Suggestion) */
-    background: rgba(255, 255, 255, 0.1) !important;
-}
-
-.category-card::after {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
+.match-card {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 135px !important;
+    margin: 8px 0 !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
     background: transparent !important;
-    z-index: 10 !important;
-    transition: background 0.1s !important;
-    pointer-events: none !important;
+    border: none !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    z-index: 1 !important;
+    display: block !important;
+    /* Card content layout */
 }
 
-.category-card:active::after {
-    background: rgba(255, 255, 255, 0.15) !important;
-    /* Ripple Effect Emulation */
-}
+/* ⚡ Layer 1: The Glass Engine (Extreme Vibrancy) */
 
-.category-card.has-image {
-    background: rgba(255, 255, 255, 0.05) !important;
-    /* Flutter: Theme.of(context).cardColor with 60% opacity overlay */
-    /* Line 248 */
-}
 
-/* Glass Overlay - Exact LinearGradient (Lines 231-238) */
+/* Layer 2: Dark Overlay */
 .category-card::before {
     content: '' !important;
     position: absolute !important;
     inset: 0 !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
-    z-index: 5 !important;
-    /* Above gradient, creates glass effect */
-    pointer-events: none !important;
+    background: var(--glass-bg) !important;
+    border-radius: 24px !important;
+    z-index: 2 !important;
 }
 
+/* Layer 3: Specular Highlight (the glass shine) */
 .category-card::after {
     content: '' !important;
     position: absolute !important;
-    top: -30px !important;
-    right: -30px !important;
-    width: 120px !important;
-    height: 120px !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-radius: 50% !important;
-    z-index: 3 !important;
-    /* Circle decoration */
+    inset: 0 !important;
+    border-radius: 24px !important;
+    z-index: 4 !important;
     pointer-events: none !important;
+    /* Inner glow for glass effect */
+    box-shadow:
+        inset 1px 1px 0 var(--glass-highlight),
+        inset 0 0 8px var(--glass-specular) !important;
+    /* Top edge highlight */
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.03) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2) !important;
 }
 
-/* Background Gloss & Patterns (Lines 231, 268, 774) */
-.glossy-highlight {
-    position: absolute !important;
-    top: 0 !important;
-    left: 20px !important;
-    right: 20px !important;
-    height: 1.5px !important;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent) !important;
-    z-index: 5 !important;
+/* Hover */
+.category-card:hover,
+.video-card:hover,
+.match-card:hover {
+    transform: translateY(-4px) scale(1.01) !important;
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.7),
+        0 4px 16px rgba(0, 0, 0, 0.5) !important;
+    z-index: 10 !important;
 }
 
-/* Category Card Background Gradients - Synced with Flutter's SweepGradient */
+.category-card:active {
+    transform: scale(0.98) !important;
+}
+
+.category-card.has-image {
+    background: transparent !important;
+}
+
+.category-card.has-image::before {
+    background: rgba(0, 0, 0, 0.2) !important;
+    /* Lighter overlay for images */
+}
+
+/* 🌈 Layer 2: The Color Gradient (Behind the Glass) */
 .category-card-bg {
     position: absolute !important;
     inset: 0 !important;
-    z-index: 1 !important;
+    z-index: 2 !important;
+    /* Behind the blur engine */
     opacity: 1 !important;
-    /* Full opacity for vibrant colors like Flutter */
+    border-radius: 28px !important;
+    overflow: hidden !important;
 }
 
+/* Glass Surface Reflections (Specular) */
+.category-card-bg::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 4 !important;
+    /* Above the blur */
+    pointer-events: none !important;
+
+    /* Rim Light & Inner Specular */
+    box-shadow:
+        inset 1.5px 1.5px 0 rgba(255, 255, 255, 0.15),
+        inset -1px -1px 0 rgba(255, 255, 255, 0.05) !important;
+
+    /* Top Rim Border */
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-top-color: rgba(255, 255, 255, 0.25) !important;
+    border-radius: 28px !important;
+}
+
+/* تحسين ألوان الـ Conic Gradients لتطابق فلاتر بالظبط */
 .category-card-bg.green {
-    background: var(--grad-green) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #00E676, #00C853, #1B5E20, #00E676) !important;
 }
 
 .category-card-bg.red {
-    background: var(--grad-red) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #FF5252, #D50000, #B71C1C, #FF5252) !important;
 }
 
 .category-card-bg.blue {
-    background: var(--grad-blue) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #448AFF, #2979FF, #0D47A1, #448AFF) !important;
 }
 
 .category-card-bg.purple {
-    background: var(--grad-purple) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #E040FB, #AA00FF, #4A148C, #E040FB) !important;
 }
 
 .category-card-bg.orange {
-    background: var(--grad-orange) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #FFAB40, #FF9100, #E65100, #FFAB40) !important;
 }
 
 .category-card-bg.pink {
-    background: var(--grad-pink) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #FF4081, #F50057, #880E4F, #FF4081) !important;
 }
 
 .category-card-bg.bein {
-    background: var(--grad-bein) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #B388FF, #7C4DFF, #311B92, #B388FF) !important;
 }
 
 .category-card-bg.default {
-    background: var(--grad-default) !important;
+    background: conic-gradient(from 180deg at 50% 50%, #B388FF, #7C4DFF, #512DA8, #B388FF) !important;
+}
+
+/* 💎 LIQUID MASTER ENGINE - High-Fidelity Refraction 💎 */
+.category-card-bg-glass {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
+    transform: translateZ(0) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Layer 1: The Liquid Refraction (Isolated) */
+.category-card-bg-glass::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: -2px !important;
+    /* Slight overflow to hide edge artifacts */
+    z-index: 1 !important;
+
+    /* 
+       Lensing Formula: 
+       Isolated to this layer so it doesn't warp the borders of the parent.
+    */
+    backdrop-filter: blur(25px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(25px) saturate(140%) !important;
+    filter: url(#liquid-refraction) !important;
+    pointer-events: none !important;
+}
+
+/* Layer 2: Specular Rim & Polished Surface (Clean Edges) */
+.category-card-bg-glass::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-top-color: rgba(255, 255, 255, 0.35) !important;
+    border-radius: 28px !important;
+    box-shadow:
+        inset 0 0 40px rgba(255, 255, 255, 0.04),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25) !important;
+    pointer-events: none !important;
+}
+
+
+
+
+
+/* Floating Icon/Image Style */
+.category-img {
+    width: 75px !important;
+    /* Larger for 'Freedom' look */
+    height: 75px !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6)) !important;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    z-index: 5 !important;
+}
+
+.base-icon {
+    width: 50px !important;
+    height: 50px !important;
+    color: white !important;
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.6)) !important;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    z-index: 5 !important;
+}
+
+.category-card:hover .category-img,
+.category-card:hover .base-icon {
+    transform: scale(1.15) translateY(-5px) rotate(3deg) !important;
+}
+
+
+.category-name {
+    z-index: 6 !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 🚀 Category Card Content Layering */
+.category-card-content {
+    position: relative !important;
+    z-index: 10 !important;
+    /* Always on top of glass layers */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 16px !important;
+    min-height: 135px !important;
+    border-radius: 28px !important;
+    overflow: hidden !important;
+}
+
+.category-name {
+    margin-top: 12px !important;
+    font-size: 13px !important;
+    font-weight: 900 !important;
+    text-align: center !important;
+    letter-spacing: -0.2px !important;
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+    z-index: 10 !important;
+}
+
+@media (min-width: 1024px) {
+    .category-name {
+        font-size: 22px !important;
+        margin-top: 20px !important;
+    }
+}
+
+.category-img {
+    width: 65px !important;
+    height: 65px !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5)) !important;
+    transition: transform 0.3s ease !important;
+    border-radius: 14px !important;
+}
+
+
+
+/* Pattern Overlay - Circles */
+.category-card-pattern {
+    position: absolute !important;
+    top: -20px !important;
+    right: -20px !important;
+    width: 100px !important;
+    height: 100px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50% !important;
+    z-index: 4 !important;
+    pointer-events: none !important;
 }
 
 /* Category Grid Layout */
@@ -142,18 +308,15 @@
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 16px !important;
-    padding-bottom: 24px !important;
+    padding: 16px !important;
+    padding-bottom: 30px !important;
 }
 
-/* Mobile Grip Optimization (User Suggestion) */
 @media (max-width: 480px) {
     .categories-grid {
         grid-template-columns: 1fr !important;
-        /* Force single column on mobile */
         gap: 12px !important;
-        /* Flutter: crossAxisSpacing: 12, mainAxisSpacing: 12 */
-        padding-bottom: 90px !important;
-        /* Context safe area for bottom nav */
+        padding-bottom: 100px !important;
     }
 }
 
@@ -167,95 +330,6 @@
     .categories-grid {
         grid-template-columns: repeat(4, 1fr) !important;
     }
-}
-
-.category-card-bg-glass {
-    position: absolute !important;
-    inset: 0 !important;
-    /* Line 235: White with alpha 0.12 and 0.05 */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05)) !important;
-    z-index: 3 !important;
-}
-
-.category-card-pattern {
-    position: absolute !important;
-    top: -20px !important;
-    right: -20px !important;
-    width: 100px !important;
-    height: 100px !important;
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-radius: 50% !important;
-    z-index: 4 !important;
-}
-
-/* Background Color Layer - Exact SweepGradient Emulation (Line 245) */
-.category-card-bg {
-    position: absolute !important;
-    inset: 0 !important;
-    opacity: 1 !important;
-    /* Full vibrant gradient */
-    z-index: 2 !important;
-}
-
-.category-card-bg.green {
-    background: conic-gradient(from 0deg at 60% 40%, #00C853, #2E7D32, #1B5E20, #00C853) !important;
-}
-
-.category-card-bg.red {
-    background: conic-gradient(from 0deg at 60% 40%, #FF1744, #C62828, #B71C1C, #FF1744) !important;
-}
-
-.category-card-bg.blue {
-    background: conic-gradient(from 0deg at 60% 40%, #2979FF, #1565C0, #0D47A1, #2979FF) !important;
-}
-
-.category-card-bg.purple {
-    background: conic-gradient(from 0deg at 60% 40%, #D500F9, #7B1FA2, #4A148C, #D500F9) !important;
-}
-
-.category-card-bg.orange {
-    background: conic-gradient(from 0deg at 60% 40%, #FF9100, #EF6C00, #E65100, #FF9100) !important;
-}
-
-.category-card-bg.pink {
-    background: conic-gradient(from 0deg at 60% 40%, #F50057, #C2185B, #880E4F, #F50057) !important;
-}
-
-.category-card-bg.bein {
-    background: conic-gradient(from 0deg at 60% 40%, #9067C6, #673AB7, #240046, #9067C6) !important;
-}
-
-.category-card-bg.default {
-    background: conic-gradient(from 0deg at 60% 40%, #7E57C2, #673AB7, #512DA8, #7E57C2) !important;
-}
-
-.category-card:hover {
-    transform: scale(1.03) !important;
-    border-color: var(--accent) !important;
-    background: rgba(184, 28, 176, 0.1) !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
-}
-
-.category-card:active {
-    transform: scale(0.95) !important;
-}
-
-/* Category Card Content (Lines 282-369) */
-.category-card-content {
-    position: relative !important;
-    z-index: 3 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 16px !important;
-    padding: 16px !important;
-    /* Flutter: EdgeInsets.all(16.0) */
-    min-height: 135px !important;
-    /* Flutter: mainAxisExtent: 135 */
-    border-radius: 24px !important;
-    /* Flutter: BorderRadius.circular(24.0) */
-    overflow: hidden !important;
 }
 
 /* Icon Container (Lines 314-338) */
@@ -402,22 +476,6 @@
     border-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-.icon-circle {
-    width: 55px !important;
-    height: 55px !important;
-    border-radius: 50% !important;
-    background: rgba(255, 255, 255, 0.2) !important;
-    /* Line 318 */
-    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
-    /* Line 322 */
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    color: white !important;
-    z-index: 4 !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26) !important;
-    /* Line 331 */
-}
 
 @media (min-width: 1024px) {
     .icon-circle {
@@ -488,25 +546,15 @@
     fill: black !important;
 }
 
-/* Match Card Redesign */
-/* Match Card - Exact Replica from matches_widgets.dart */
-.match-card {
-    background: rgba(20, 20, 20, 0.7) !important;
-    /* Glassy Black */
-    backdrop-filter: blur(10px) !important;
-    border-radius: 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    margin: 8px !important;
-    transition: all 0.2s ease-out !important;
-    position: relative !important;
-    overflow: hidden !important;
-    /* Clip children like Badge */
+/* Match Card Redesign - Final Liquid Polish */
+.match-card:hover {
+    transform: scale(1.02) translateY(-4px) !important;
+    z-index: 10 !important;
 }
 
-.match-card:hover {
-    transform: scale(1.02) !important;
-    border-color: #673AB7 !important;
-    box-shadow: 0 0 15px rgba(103, 58, 183, 0.4) !important;
+.match-card:hover .category-card-bg-glass::after {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1) !important;
 }
 
 .match-teams {
@@ -820,13 +868,17 @@
 /* News & Goal Cards - Exact Vertical Match */
 .news-card,
 .video-card {
-    background: var(--card-background) !important;
-    border-radius: 25px !important;
-    margin: 10px !important;
+    position: relative !important;
+    width: 100% !important;
+    min-height: 280px !important;
+    border-radius: 28px !important;
+    /* Unified radius */
     overflow: hidden !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.2s ease-out !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    z-index: 1 !important;
     display: flex !important;
     flex-direction: column !important;
     text-decoration: none !important;
@@ -834,7 +886,14 @@
 
 .news-card:hover,
 .video-card:hover {
-    transform: scale(1.02) !important;
+    transform: scale(1.02) translateY(-4px) !important;
+    z-index: 10 !important;
+}
+
+.news-card:hover .category-card-bg-glass::after,
+.video-card:hover .category-card-bg-glass::after {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1) !important;
 }
 
 .news-thumbnail-container,

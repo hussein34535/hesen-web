@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import MatchCard from '@/components/MatchCard';
 import Skeleton from '@/components/Skeleton';
+import { GlassFilter } from '@/components/ChannelCard';
+import { useSearch } from '@/context/SearchContext';
 
 interface StreamLink {
     name: string;
@@ -25,6 +27,7 @@ interface Match {
 }
 
 export default function MatchesPage() {
+    const { searchQuery } = useSearch();
     const [matches, setMatches] = useState<Match[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -36,15 +39,7 @@ export default function MatchesPage() {
                 if (!res.ok) throw new Error('Failed to fetch');
                 const data = await res.json();
                 if (data.success) {
-                    const matchesData = data.data || [];
-
-                    // Sort: live first, then upcoming, then finished
-                    const sorted = matchesData.sort((a: Match, b: Match) => {
-                        const order: Record<string, number> = { live: 0, upcoming: 1, finished: 2 };
-                        return (order[a.status] || 2) - (order[b.status] || 2);
-                    });
-
-                    setMatches(sorted);
+                    setMatches(data.data || []);
                 } else {
                     throw new Error('API error');
                 }
@@ -58,13 +53,28 @@ export default function MatchesPage() {
         loadMatches();
     }, []);
 
+    const filteredMatches = useMemo(() => {
+        // Sort: live first, then upcoming, then finished
+        const sortedMatches = [...matches].sort((a: Match, b: Match) => {
+            const order: Record<string, number> = { live: 0, upcoming: 1, finished: 2 };
+            return (order[a.status] || 2) - (order[b.status] || 2);
+        });
+
+        if (!searchQuery.trim()) return sortedMatches;
+        const query = searchQuery.toLowerCase();
+        return sortedMatches.filter(m =>
+            m.homeTeam.toLowerCase().includes(query) ||
+            m.awayTeam.toLowerCase().includes(query) ||
+            (m.league && m.league.toLowerCase().includes(query))
+        );
+    }, [searchQuery, matches]);
+
     if (loading) {
         return (
-            <div className="page-fade-in" style={{ padding: '0 16px' }}>
-                <Skeleton width="120px" height="28px" style={{ marginBottom: '24px' }} />
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div className="page-fade-in" style={{ padding: '0 8px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {[...Array(4)].map((_, i) => (
-                        <Skeleton key={i} height="200px" borderRadius="20px" />
+                        <Skeleton key={i} height="135px" borderRadius="28px" />
                     ))}
                 </div>
             </div>
@@ -82,21 +92,20 @@ export default function MatchesPage() {
         );
     }
 
-    if (matches.length === 0) {
-        return (
-            <div className="empty-state page-fade-in">
-                <p>لا توجد مباريات متاحة</p>
-            </div>
-        );
-    }
-
     return (
         <div className="page-fade-in" style={{ padding: '0 8px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {matches.map((match) => (
-                    <MatchCard key={match.id} match={match} />
-                ))}
-            </div>
+            {filteredMatches.length === 0 ? (
+                <div className="empty-state">
+                    <p>لا توجد مباريات تطابق بحثك</p>
+                </div>
+            ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {filteredMatches.map((match) => (
+                        <MatchCard key={match.id} match={match} />
+                    ))}
+                </div>
+            )}
+            <GlassFilter />
         </div>
     );
 }

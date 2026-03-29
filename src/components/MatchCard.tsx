@@ -59,6 +59,9 @@ export default function MatchCard({ match }: MatchCardProps) {
 
     const card = (
         <div className={`match-card fade-in ${isLive ? 'live' : ''}`}>
+            {/* 💎 Liquid Master Glass Background 💎 */}
+            <div className="category-card-bg-glass" />
+
             {/* Premium Star - Flutter stars_rounded */}
             {isPremium && (
                 <div className="premium-tag" style={{ top: '12px', right: '12px', background: 'transparent', boxShadow: 'none' }}>

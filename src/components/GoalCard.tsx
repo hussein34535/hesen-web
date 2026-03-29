@@ -26,6 +26,8 @@ export default function GoalCard({ goal }: GoalCardProps) {
             href={`/player?url=${encodeURIComponent(goal.videoUrl)}&name=${encodeURIComponent(goal.title)}`}
             className="video-card fade-in"
         >
+            {/* 💎 Liquid Master Glass Background 💎 */}
+            <div className="category-card-bg-glass" />
             {/* Thumbnail */}
             <div className="video-thumbnail">
                 <Image

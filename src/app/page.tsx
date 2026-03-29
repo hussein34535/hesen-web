@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import CategoryCard from '@/components/ChannelCard';
 import Skeleton from '@/components/Skeleton';
 import { Search } from 'lucide-react';
+import { useSearch } from '@/context/SearchContext';
 
 interface Channel {
   id: string;
@@ -21,9 +22,9 @@ interface Category {
 }
 
 export default function HomePage() {
+  const { searchQuery } = useSearch();
   const [categories, setCategories] = useState<Category[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

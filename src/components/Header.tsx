@@ -6,8 +6,11 @@ import {
     Palette, Send, ShieldCheck, Moon, Sun, Edit2, X
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useSearch } from '@/context/SearchContext';
 
 export default function Header() {
+    const { searchQuery, setSearchQuery, isSearchActive, setIsSearchActive } = useSearch();
+
     // Mock user state (Matches Flutter main.dart defaults)
     const [userName, setUserName] = useState("المستخدم");
     const [isSubscribed, setIsSubscribed] = useState(true);
@@ -15,8 +18,6 @@ export default function Header() {
     const [isDarkMode, setIsDarkMode] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isTelegramOpen, setIsTelegramOpen] = useState(false);
-    const [isSearchActive, setIsSearchActive] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
     const userProfileImage = null;
 
     // Simulate Flutter's showTelegramDialog logic

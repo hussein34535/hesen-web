@@ -28,6 +28,8 @@
   --grad-default: conic-gradient(from 180deg at 50% 50%, #673AB7 0%, rgba(103, 58, 183, 0.8) 25%, rgba(103, 58, 183, 0.6) 50%, rgba(103, 58, 183, 0.8) 75%, #673AB7 100%);
 
   --radius-lg: 24px;
+  --background-color: var(--bg-dark);
+  --text-color: var(--text-main);
 }
 
 * {
@@ -394,22 +396,9 @@ body {
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
-/* Video Card */
+/* Video Cards neutralized for Glass Engine in premium.css */
 .video-card {
-  background: var(--bg-card);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1.2px solid rgba(255, 255, 255, 0.1);
-  text-decoration: none;
-  display: block;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-.video-card:hover {
-  transform: scale(1.02);
-  border-color: var(--accent-color);
-  box-shadow: 0 15px 35px rgba(103, 58, 183, 0.25);
+  background: transparent;
 }
 
 .video-thumbnail {
@@ -517,26 +506,9 @@ body {
 }
 
 /* Match Card - Flutter MatchBox Design */
+/* Match Cards neutralised for Glass Engine in premium.css */
 .match-card {
-  position: relative;
-  background: linear-gradient(to bottom right, #141414, #000000);
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease-out;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-}
-
-.match-card:hover {
-  transform: scale(1.02);
-  border-color: var(--accent-primary);
-  border-width: 2px;
-  box-shadow: 0 15px 30px rgba(103, 58, 183, 0.4);
-}
-
-.match-card.live {
-  border: 2px solid #F44336;
-  box-shadow: 0 0 20px rgba(244, 67, 54, 0.2);
+  background: transparent;
 }
 
 .match-header {

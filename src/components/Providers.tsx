@@ -1,11 +1,12 @@
 'use client';
 
-import { ThemeProvider } from '../context/ThemeContext';
+import { ReactNode } from 'react';
+import { SearchProvider } from '@/context/SearchContext';
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children }: { children: ReactNode }) {
     return (
-        <ThemeProvider>
+        <SearchProvider>
             {children}
-        </ThemeProvider>
+        </SearchProvider>
     );
 }

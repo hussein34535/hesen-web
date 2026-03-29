@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import GoalCard from '@/components/GoalCard';
 import Skeleton from '@/components/Skeleton';
+import { GlassFilter } from '@/components/ChannelCard';
+import { useSearch } from '@/context/SearchContext';
 
 interface Goal {
     id: string;
@@ -14,6 +16,7 @@ interface Goal {
 }
 
 export default function GoalsPage() {
+    const { searchQuery } = useSearch();
     const [goals, setGoals] = useState<Goal[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -39,6 +42,14 @@ export default function GoalsPage() {
         loadGoals();
     }, []);
 
+    const filteredGoals = useMemo(() => {
+        if (!searchQuery.trim()) return goals;
+        const query = searchQuery.toLowerCase();
+        return goals.filter(g =>
+            g.title.toLowerCase().includes(query)
+        );
+    }, [searchQuery, goals]);
+
     if (loading) {
         return (
             <div className="page-fade-in" style={{ padding: '0 16px' }}>
@@ -63,21 +74,20 @@ export default function GoalsPage() {
         );
     }
 
-    if (goals.length === 0) {
-        return (
-            <div className="empty-state page-fade-in">
-                <p>لا توجد أهداف متاحة</p>
-            </div>
-        );
-    }
-
     return (
         <div className="page-fade-in" style={{ padding: '0 4px' }}>
-            <div className="videos-grid">
-                {goals.map((goal) => (
-                    <GoalCard key={goal.id} goal={goal} />
-                ))}
-            </div>
+            {filteredGoals.length === 0 ? (
+                <div className="empty-state">
+                    <p>لا توجد أهداف تطابق بحثك</p>
+                </div>
+            ) : (
+                <div className="videos-grid">
+                    {filteredGoals.map((goal) => (
+                        <GoalCard key={goal.id} goal={goal} />
+                    ))}
+                </div>
+            )}
+            <GlassFilter />
         </div>
     );
 }

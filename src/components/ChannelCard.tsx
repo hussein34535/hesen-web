@@ -63,15 +63,14 @@ export default function CategoryCard({ category }: CategoryCardProps) {
 
     return (
         <Link href={`/category/${category.id}`} className={`category-card fade-in ${imageUrl ? 'has-image' : ''}`}>
+            {/* Global Smooth Filter */}
+            <GlassFilter />
+
             {/* Glossy Top Highlight (Line 774) */}
             <div className="glossy-highlight" />
 
-            {/* Background Layers (Lines 228, 243) */}
+            {/* Background Layers (Pure Glass Only) */}
             <div className="category-card-bg-glass" />
-            {!imageUrl && <div className={`category-card-bg ${bgClass}`} />}
-
-            {/* Pattern Overlay - Circles (Line 268) */}
-            {!imageUrl && !lowerName.includes('bein') && <div className="category-card-pattern" />}
 
             {/* Premium Badge (Line 375) */}
             {isPremium && (
@@ -81,7 +80,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
                 </div>
             )}
 
-            {/* Content (Line 282) */}
+            {/* Content (Floating Freedom) */}
             <div className="category-card-content">
                 <div className="category-icon-container">
                     {imageUrl ? (
@@ -93,9 +92,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
                             className="category-img"
                         />
                     ) : (
-                        <div className="icon-circle">
-                            <Icon size={28} className="base-icon" />
-                        </div>
+                        <Icon size={40} className="base-icon" />
                     )}
                 </div>
                 <h3 className="category-name">{category.name}</h3>
@@ -140,5 +137,21 @@ export function ChannelCard({ channel }: ChannelCardProps) {
                 </div>
             </div>
         </Link>
+    );
+}
+
+// 💎 Liquid Master Filter Engine 💎
+export function GlassFilter() {
+    return (
+        <svg style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}>
+            <filter id="liquid-refraction">
+                {/* 
+                   Mathematical Refraction:
+                   Warping the background light to create a "liquid" lens effect.
+                */}
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" seed="2" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </svg>
     );
 }

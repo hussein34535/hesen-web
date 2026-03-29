@@ -25,6 +25,8 @@ export default function HighlightCard({ highlight }: HighlightCardProps) {
             href={`/player?url=${encodeURIComponent(highlight.videoUrl)}&name=${encodeURIComponent(highlight.title)}`}
             className="video-card fade-in"
         >
+            {/* 💎 Liquid Master Glass Background 💎 */}
+            <div className="category-card-bg-glass" />
             {/* Thumbnail */}
             <div className="video-thumbnail">
                 <Image
